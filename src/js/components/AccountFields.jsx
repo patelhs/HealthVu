@@ -15,11 +15,11 @@ export default class AccountFields extends React.Component {
 
     //alert(this.props.fieldValues.name);
     // Get values via this.refs
-    
+
     var data = {
       name     : this.refs.name.getDOMNode().value,
       password : this.refs.password.getDOMNode().value,
-      email    : this.refs.email.getDOMNode().value,
+      email    : this.refs.email.getDOMNode().value
     };
 
     this.props.saveValues(data);

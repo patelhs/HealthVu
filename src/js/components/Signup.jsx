@@ -3,11 +3,10 @@ import ReactMixin from 'react-mixin';
 import LoginActionCreators from '../actions/LoginActionCreators';
 
 import AccountFields from './AccountFields';
-//import PracticeFields from './PracticeFields';
-//import BillingFields  from './BillingFields';
-//import Confirmation  from './Confirmation';
+import PracticeFields from './PracticeFields';
+import BillingFields  from './BillingFields';
+import SignupConfirmation  from './SignupConfirmation';
 //import Success  from './Success';
-//var SurveyFields  = require('./SurveyFields')
 import  assign from 'object-assign';
 
 
@@ -38,52 +37,45 @@ export default class Signup extends React.Component {
       extra: '',
       step: 1
       //fieldValues: fieldValues
-      
+
     };
     this.onChange = this.nextStep.bind(this);
 
- 
- 
-  //this.state.step = 1;
-
   }
+
+  /*
 
   signup(e) {
     e.preventDefault();
     LoginActionCreators.signup(this.state.user, this.state.password, this.state.extra)
   }
-
+*/
 
   saveValues(field_value) {
-    alert("In save value");
+    //alert("In save value");
     return function() {
       fieldValues = assign({}, fieldValues, field_value)
     }.bind(this)();
   }
 
   nextStep() {
-    //this.setState({
-    //  step : this.state.step + 1
-    //})
     var state = {user: '', password: '', extra: '', step: this.state.step+1};
     this.setState(state);
-    alert(this.state.step);
-    //this.showStep();
   }
 
   previousStep() {
-    //this.setState({
-    //  step : this.state.step - 1
-    //})
-    this.state.step-=1;
+    var state = {user: '', password: '', extra: '', step: this.state.step-1};
+    this.setState(state);
   }
 
   submitRegistration() {
     // Handle via ajax submitting the user data, upon
     // success return this.nextStop(). If it fails,
     // show the user the error but don't advance
-
-    this.nextStep();
+    console.log("registering");
+    //e.preventDefault();
+    //console.log("name: " + fieldValues.name);
+    LoginActionCreators.signup(fieldValues.name, fieldValues.password, this.state.extra);
   }
 
   showStep() {
@@ -91,22 +83,21 @@ export default class Signup extends React.Component {
       case 1:
         return <AccountFields fieldValues={fieldValues}
                               nextStep={this.nextStep.bind(this)}
-                              previousStep={this.previousStep.bind(this)}
                               saveValues={this.saveValues.bind(this)} />
       case 2:
-         return <AccountFields fieldValues={fieldValues}
+         return <PracticeFields fieldValues={fieldValues}
                               nextStep={this.nextStep.bind(this)}
                               previousStep={this.previousStep.bind(this)}
                               saveValues={this.saveValues.bind(this)} />
       case 3:
        return <BillingFields fieldValues={fieldValues}
-                             nextStep={this.nextStep}
-                             previousStep={this.previousStep}
-                             saveValues={this.saveValues} />
+                             nextStep={this.nextStep.bind(this)}
+                             previousStep={this.previousStep.bind(this)}
+                             saveValues={this.saveValues.bind(this)} />
       case 4:
-        return <Confirmation fieldValues={fieldValues}
-                             previousStep={this.previousStep}
-                             submitRegistration={this.submitRegistration} />
+        return <SignupConfirmation fieldValues={fieldValues}
+                                    previousStep={this.previousStep.bind(this)}
+                                    submitRegistration={this.submitRegistration.bind(this)} />
       case 5:
         return <Success fieldValues={fieldValues} />
     }
