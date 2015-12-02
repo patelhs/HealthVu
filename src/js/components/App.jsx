@@ -58,12 +58,14 @@ export default class App extends React.Component {
   render() {
     return (
       <div className="container">
-        <nav className="navbar navbar-default">
+        <nav className="naviBar">
           <div className="navbar-header">
-            <a className="navbar-brand" href="/">HealthVu Hemal </a>
+            <a href="/"> <span className="title -health">Health</span><span className="title -vue">Vue</span></a>
           </div>
           {this.headerItems}
         </nav>
+        <div className="titleBorder"><div className="titleBorderMask"></div></div>
+
         <RouteHandler/>
       </div>
     );

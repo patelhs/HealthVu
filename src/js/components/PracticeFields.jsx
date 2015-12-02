@@ -31,33 +31,33 @@ export default class PracticeFields extends React.Component {
       <div>
       <div>
         <h2>Practice Details</h2>
-        <ul className="form-fields">
+        <ul className="form-fields center_div">
           <li>
             <label>Practice Name</label>
-            <input type="text" ref="practiceName" defaultValue={this.props.fieldValues.practiceName} />
+            <input className="input -primary" type="text" ref="practiceName" defaultValue={this.props.fieldValues.practiceName} />
           </li>
 
           <li>
             <label>Email</label>
-            <input type="phone" ref="practicePhone" defaultValue={this.props.fieldValues.practicePhone} />
+            <input className="input -primary" type="phone" ref="practicePhone" defaultValue={this.props.fieldValues.practicePhone} />
           </li>
           <li>
             <label>Website</label>
-            <input type="text" ref="practiceWebsite" defaultValue={this.props.fieldValues.practiceWebsite} />
+            <input className="input -primary" type="text" ref="practiceWebsite" defaultValue={this.props.fieldValues.practiceWebsite} />
           </li>
         </ul>
       </div>
       <div>
         <h2>Practice Locations</h2>
-        <ul className="form-fields">
+        <ul className="form-fields center_div">
           <li>
             <label>Practice Address</label>
-            <input type="text" ref="practiceAddress" defaultValue={this.props.fieldValues.practiceAddress} />
+            <input className="input -primary" type="text" ref="practiceAddress" defaultValue={this.props.fieldValues.practiceAddress} />
           </li>
           <li className="form-footer">
-            <button className="btn -default pull-left" onClick={this.props.previousStep.bind(this)}>Back</button>
-            <button className="btn -primary pull-right" onClick={this.nextStep.bind(this)}>Save &amp; Continue</button>
+            <button className="btn -continueBtn center-block" onClick={this.nextStep.bind(this)}>Continue</button>
           </li>
+          <button className="btn -backBtn pull-left" onClick={this.props.previousStep.bind(this)}>Back</button>
         </ul>
       </div>
       </div>

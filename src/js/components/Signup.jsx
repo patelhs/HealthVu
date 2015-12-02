@@ -11,9 +11,10 @@ import  assign from 'object-assign';
 
 
 var fieldValues = {
-    name: 'hemal',
+    fullName: 'null',
     email: null,
     password: null,
+    confirmPassword: null,
     practiceName: null,
     practicePhone: null,
     practiceWebsite: null,
@@ -75,7 +76,7 @@ export default class Signup extends React.Component {
     console.log("registering");
     //e.preventDefault();
     //console.log("name: " + fieldValues.name);
-    LoginActionCreators.signup(fieldValues.name, fieldValues.password, this.state.extra);
+    LoginActionCreators.signup(fieldValues.fullName, fieldValues.password, this.state.extra);
   }
 
   showStep() {
@@ -110,10 +111,12 @@ export default class Signup extends React.Component {
 
     return (
       <main>
-        <span className="progress-step">Step {this.state.step}</span>
-        <progress className="progress" style={style}></progress>
+        <span className="progress-step center-block">Step {this.state.step}</span>
+        <progress className="progress center-block" style={style}></progress>
         {this.showStep()}
+
       </main>
+
     );
   }
 }

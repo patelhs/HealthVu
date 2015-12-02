@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactMixin from 'react-mixin';
+import { Route, RouteHandler, Link } from 'react-router';
 
 export default class AccountFields extends React.Component {
   constructor(props) {
@@ -29,23 +30,27 @@ export default class AccountFields extends React.Component {
    render() {
     return (
       <div>
-        <h2>Account Details</h2>
-        <ul className="form-fields">
+        <ul className="form-fields center_div">
           <li>
-            <label>Name</label>
-            <input type="text" ref="name" defaultValue={this.props.fieldValues.name} />
+            <label>Full Name</label>
+            <input className="input -primary" type="text" ref="name" defaultValue={this.props.fieldValues.name} />
+          </li>
+          <li>
+            <label>Email Address</label>
+            <input className="input -primary" type="email" ref="email" defaultValue={this.props.fieldValues.email} />
           </li>
           <li>
             <label>Password</label>
-            <input type="password" ref="password" defaultValue={this.props.fieldValues.password} />
+            <input className="input -primary" type="password" ref="password" defaultValue={this.props.fieldValues.password} />
           </li>
           <li>
-            <label>Email</label>
-            <input type="email" ref="email" defaultValue={this.props.fieldValues.email} />
+            <label>Confirm Password</label>
+            <input className="input -primary" type="password" ref="password" defaultValue={this.props.fieldValues.password} />
           </li>
-          <li className="form-footer">
-            <button className="btn -primary pull-right" onClick={this.nextStep.bind(this)}>Save &amp; Continue</button>
+          <li>
+            <button className="btn -continueBtn center-block" onClick={this.nextStep.bind(this)}>Continue</button>
           </li>
+          <Link className="btn -backBtn pull-left" to="login">Login</Link>
         </ul>
       </div>
     )

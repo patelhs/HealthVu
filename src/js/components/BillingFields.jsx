@@ -30,23 +30,23 @@ export default class BillingFields extends React.Component {
     return (
       <div>
         <h2>Billing Details</h2>
-        <ul className="form-fields">
+        <ul className="form-fields center_div">
           <li>
             <label>Card Holder</label>
-            <input type="text" ref="ccName" defaultValue={this.props.fieldValues.ccName} />
+            <input className="input -primary" type="text" ref="ccName" defaultValue={this.props.fieldValues.ccName} />
           </li>
           <li>
             <label>Expiration Date</label>
-            <input type="date" ref="ccExpDate" defaultValue={this.props.fieldValues.ccExpDate} />
+            <input className="input -primary" type="date" ref="ccExpDate" defaultValue={this.props.fieldValues.ccExpDate} />
           </li>
           <li>
             <label>Security Code</label>
-            <input type="text" ref="ccSecurityCode" defaultValue={this.props.fieldValues.ccSecurityCode} />
+            <input className="input -primary" type="text" ref="ccSecurityCode" defaultValue={this.props.fieldValues.ccSecurityCode} />
           </li>
           <li className="form-footer">
-            <button className="btn -default pull-left" onClick={this.props.previousStep.bind(this)}>Back</button>
-            <button className="btn -primary pull-right" onClick={this.nextStep.bind(this)}>Save &amp; Continue</button>
+            <button className="btn -continueBtn center-block" onClick={this.nextStep.bind(this)}>Continue</button>
           </li>
+          <button className="btn -backBtn pull-left" onClick={this.props.previousStep.bind(this)}>Back</button>
         </ul>
       </div>
     )
