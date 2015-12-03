@@ -4,6 +4,7 @@ import BasicTable from './Home_appointments_table'
 
 import { Link } from 'react-router';
 
+
 export default AuthenticatedComponent(class Home extends React.Component {
   render() {
     return (
@@ -12,7 +13,6 @@ export default AuthenticatedComponent(class Home extends React.Component {
         <Link to="/private">Private page</Link>
 
     	<BasicTable />
-	
 
       </div>
     );

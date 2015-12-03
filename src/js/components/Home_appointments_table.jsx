@@ -3,7 +3,8 @@
 import React from 'react';
 import {BootstrapTable, TableHeaderColumn} from 'react-bootstrap-table';
 
-import AppointmentActionCreator from '../actions/AppointmentActionCreators';
+
+//import AppointmentActionCreator from '../actions/AppointmentActionCreators';
 
 var products = [];
 
@@ -19,22 +20,18 @@ function addProducts(quantity) {
   }
 }
 
-addProducts(5);
+addProducts(10);
 
 
 export default class BasicTable extends React.Component{
-
- constructor() {
-    super()
-    this.state = {
-      appointments: ''
-    };
-    AppointmentActionCreator.getAppointments();
-  }
-
   render(){
     return (
-      <div>dsdsdcxcxcxcs</div>
+        <BootstrapTable data={products} height="120">
+          <TableHeaderColumn dataField="id" isKey={true}>Product ID</TableHeaderColumn>
+          <TableHeaderColumn dataField="name">Product Name</TableHeaderColumn>
+          <TableHeaderColumn dataField="price">Product Price</TableHeaderColumn>
+        </BootstrapTable>
     );
   }
 };
+
