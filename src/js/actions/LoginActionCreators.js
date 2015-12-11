@@ -23,5 +23,10 @@ export default {
 
   logoutUser: () => {
     dispatch(ActionTypes.LOGOUT_USER);
+  },
+
+  googleLogin: (googleUser) => {
+    console.log("actionc: " + googleUser);
+    dispatch(ActionTypes.GOOGLE_LOGIN, {googleUser: googleUser});
   }
 }

@@ -22,6 +22,7 @@ class LoginStore extends BaseStore {
 
       case ActionTypes.REQUEST_LOGIN_USER_SUCCESS:
         this._jwt = action.body.id_token;
+        //console.log(action.body.id_token);
         localStorage.setItem("jv_jwt", this._jwt);
         this._user = jwt_decode(this._jwt);
         this._error = null;
@@ -41,6 +42,18 @@ class LoginStore extends BaseStore {
         this.emitChange();
         break;
 
+      case ActionTypes.GOOGLE_LOGIN:
+        //console.log(action.googleUser.po.id_token);
+        this._jwt = action.googleUser.po.id_token;
+        //console.log(jwt_decode(this._jwt));
+        ////console.log(action.body.id_token);
+        localStorage.setItem("jv_jwt", this._jwt);
+        this._user = jwt_decode(this._jwt);
+        this._error = null;
+        this.emitChange();
+        break;
+        //alert("goole login");
+        //console.log("In store" + action.googleUser);
       default:
         break;
     };
@@ -48,11 +61,13 @@ class LoginStore extends BaseStore {
 
   _autoLogin () {
     let jwt = localStorage.getItem("jv_jwt");
-    if (jwt) {
+    if (jwt) { // != 'undefined' || jwt != null) {
       this._jwt = jwt;
+      console.log(jwt);
       this._user = jwt_decode(this._jwt);
       console.log("&*&*&* autologin success")
     }
+
   }
 
   get user() {

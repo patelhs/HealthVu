@@ -3,6 +3,8 @@ import { Input, Button }     from 'react-bootstrap';
 import ReactMixin from 'react-mixin';
 import LoginActionCreators from '../actions/LoginActionCreators';
 
+import GoogleLoginButton from './GoogleLoginButton'
+
 export default class Login extends React.Component {
 
   constructor() {
@@ -34,8 +36,9 @@ export default class Login extends React.Component {
           <label htmlFor="password">Password</label>
           <input type="password" valueLink={this.linkState('password')} className="form-control" id="password" ref="password" placeholder="Password" />
         </div>
-        
-        <Button key="submitButton" type="submit" 
+
+         <GoogleLoginButton />
+        <Button key="submitButton" type="submit"
                 bsStyle="primary" onClick={this.login.bind(this)}>Submit</Button>
       </form>
     </div>

@@ -4,5 +4,5 @@ export default {
   LOGIN_URL: BASE_URL + 'sessions/create',
   SIGNUP_URL: BASE_URL + 'users',
 
-  APPOINTMENTS_API_URL: BASE_URL + 'api/quotes'
+  APPOINTMENTS_API_URL: BASE_URL + 'api/appointments'
 }

@@ -2,13 +2,24 @@
 <html>
 <head>
   <meta charset="UTF-8">
+  <meta name="google-signin-client_id" content="658858589763-6hgdnvb3u2vg5uhntbk23d6ai491s9np.apps.googleusercontent.com">
   <title>Document</title>
 
   <link rel="stylesheet" href="styles/main.css">
   <link rel="stylesheet" href="styles/jv.css">
 
   <link rel="stylesheet" href="styles/react-bootstrap-table-all.css">
-  <link rel="stylesheet" href="styles/toastr.css">s
+  <script src="https://apis.google.com/js/platform.js" async defer></script>
+
+  <script src="https://apis.google.com/js/platform.js?onload=triggerGoogleLoaded" async defer></script>
+  <script type="text/javascript">
+    function triggerGoogleLoaded() {
+      window.dispatchEvent(new Event('google-loaded'));
+      gapi.load('auth2', function() {
+        gapi.auth2.init();
+      });
+    }
+  </script>
 
 </head>
 <body class="img">

@@ -4,6 +4,7 @@ export default keyMirror({
   REQUEST_LOGIN_USER: null,
   REQUEST_LOGIN_USER_SUCCESS: null,
   REQUEST_LOGIN_USER_ERROR: null,
+  GOOGLE_LOGIN: null,
 
   REQUEST_SIGNUP_USER: null,
   REQUEST_SIGNUP_USER_SUCCESS: null,

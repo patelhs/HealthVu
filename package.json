@@ -1,7 +1,8 @@
 {
-  "name": "jv-forms",
+  "name": "HealthVu",
   "version": "0.1.0",
-  "description": "JV Forms: forms for JV app",
+  "private": true,
+  "description": "HealthVu ",
   "author": "",
   "license": "MIT",
   "scripts": {
@@ -23,14 +24,17 @@
   },
   "dependencies": {
     "bluebird": "~2.9.27",
-    "bootstrap": "^3.3.0",
+    "bootstrap": "^3.3.6",
+    "fbjs": "^0.3.2",
     "flux": "^2.0.3",
+    "forms": "^1.1.4",
     "jwt-decode": "^1.1.0",
     "keymirror": "^0.1.1",
     "object-assign": "^2.0.0",
-    "react": "^0.14.2",
-    "react-bootstrap": "^0.23.7",
-    "react-bootstrap-table": "^1.2.7",
+    "react": "^0.14.3",
+    "react-bootstrap": "^0.28.1",
+    "react-bootstrap-table": "^1.2.15",
+    "react-data-components": "^0.6.0",
     "react-mixin": "^1.1.0",
     "react-router": "^0.13.3",
     "request": "^2.57.0"

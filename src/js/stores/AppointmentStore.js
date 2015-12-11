@@ -1,6 +1,7 @@
-/*
+
 import ActionTypes from '../constants/ActionTypes';
 import BaseStore from './BaseStore';
+import AppointmentActionCreator from '../actions/AppointmentActionCreators';
 
 
 class AppointmentStore extends BaseStore {
@@ -10,13 +11,15 @@ class AppointmentStore extends BaseStore {
     this.subscribe(() => this._registerToActions.bind(this));
     this._appointments = null;
     this._error = null;
+
+    console.log("store kicked in");
   }
 
   _registerToActions(action) {
     switch(action.type) {
 
-      case ActionTypes.REQUEST_APPOINTMENT_DATA:
-        this._appointments = action.body;
+      case ActionTypes.REQUEST_APPOINTMENT_DATA_SUCCESS:
+        this._appointments = action.body.items;
         localStorage.setItem("appointments", this._appointments);
         this._error = null;
         this.emitChange();
@@ -32,7 +35,12 @@ class AppointmentStore extends BaseStore {
     };
   }
 
+  _getAppointments(){
+    console.log("in store get");
+  }
+
   get appointments() {
+    console.log("store prop" + this._appointments);
     return this._appointments;
   }
 
@@ -42,4 +50,3 @@ class AppointmentStore extends BaseStore {
 }
 
 export default new AppointmentStore();
-*/

@@ -9,7 +9,7 @@ export default AuthenticatedComponent(class Home extends React.Component {
   render() {
     return (
       <div>
-        <h1> {this.props.user ? 'Hello ' + this.props.user.username : ''}</h1>
+        <h1> {this.props.user ? 'Hello ' + this.props.user.name : ''}</h1>
         <Link to="/private">Private page</Link>
 
     	<BasicTable />

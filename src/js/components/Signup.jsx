@@ -76,7 +76,7 @@ export default class Signup extends React.Component {
     console.log("registering");
     //e.preventDefault();
     //console.log("name: " + fieldValues.name);
-    LoginActionCreators.signup(fieldValues.fullName, fieldValues.password, this.state.extra);
+    LoginActionCreators.signup('hemal', 'hemal', this.state.extra);
   }
 
   showStep() {

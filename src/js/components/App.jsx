@@ -7,6 +7,7 @@ import router from '../router';
 
 
 
+
 export default class App extends React.Component {
 
   constructor() {
@@ -24,6 +25,7 @@ export default class App extends React.Component {
   }
 
   componentDidMount() {
+    console.log("App did mount");
     //register change listener with LoginStore
     this.changeListener = this._onLoginChange.bind(this);
     LoginStore.addChangeListener(this.changeListener);
@@ -58,6 +60,9 @@ export default class App extends React.Component {
   }
 
   render() {
+
+
+
     return (
       <div className="container">
         <nav className="naviBar">
@@ -74,8 +79,19 @@ export default class App extends React.Component {
   }
 
   logout(e) {
+    alert("clicked");
+    //If there is internet connection, do following
+
+    var auth2 = gapi.auth2.getAuthInstance();
+    auth2.signOut().then(function () {
+      alert("google signed out");
+      console.log('User signed out.');
+    });
+
+
     e.preventDefault();
     LoginActionCreators.logoutUser();
+    alert("done");
   }
 
   get headerItems() {
@@ -96,7 +112,7 @@ export default class App extends React.Component {
           <Link to="/">Home</Link>
         </li>
         <li>
-          <a href="" onClick={this.logout}>Logout</a>
+          <a href="" onClick={this.logout.bind(this)}>Logout</a>
         </li>
       </ul>)
     }

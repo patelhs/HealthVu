@@ -5,12 +5,12 @@ import { APPOINTMENTS_API_URL } from '../constants/AppConstants';
 
 class AppointmentService {
 
-  getAll() {
+  getAll(pageNumber, pageSize) {
     return new bluebird( (resolve, reject) => {
-      request.get(
+      request.post(
         {
           url: APPOINTMENTS_API_URL,
-          body: null,
+          body: {pageNumber, pageSize},
           json: true
         },
         (err, response, body) => {
