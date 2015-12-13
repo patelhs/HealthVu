@@ -11,9 +11,20 @@ export default {
       success: ActionTypes.REQUEST_APPOINTMENT_DATA_SUCCESS,
       failure: ActionTypes.REQUEST_APPOINTMENT_DATA_ERROR
     }, { pageNumber, pageSize });
+  },
+
+  getHealthVuAppointments: (practiceId, resultPage, maxResults) => {
+    let promise = AppointmentService.getAppointments(practiceId, resultPage, maxResults);
+    dispatchAsync(promise, {
+      request: ActionTypes.REQUEST_APPOINTMENT_DATA,
+      success: ActionTypes.REQUEST_APPOINTMENT_DATA_SUCCESS,
+      failure: ActionTypes.REQUEST_APPOINTMENT_DATA_ERROR
+    }, { practiceId, resultPage, maxResults });
   }
 }
 
 //getAppointment: (appointmentId) => {}
 //saveAppointment: (appointment) => {}
 //exportAppointments: (appointments) => {}
+
+

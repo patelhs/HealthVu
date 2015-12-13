@@ -89,7 +89,7 @@ export default class App extends React.Component {
     });
 
 
-    e.preventDefault();
+    //e.preventDefault();
     LoginActionCreators.logoutUser();
     alert("done");
   }

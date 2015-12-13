@@ -3,26 +3,9 @@ import {Input} from 'react-bootstrap';
 import {BootstrapTable, TableHeaderColumn, TableDataSet} from 'react-bootstrap-table';
 import AppointmentStore from '../stores/AppointmentStore';
 import ReactMixin from 'react-mixin';
+import dateFormat from 'dateformat';
 
 import AppointmentActionCreator from '../actions/AppointmentActionCreators';
-
-var products = [];
-
-function addProducts(quantity) {
-  var startId = products.length;
-  for (var i = 0; i < quantity; i++) {
-    var id = startId + i;
-    products.push({
-      id: id,
-      name: "Item name " + id,
-      price: 2100 + i
-    });
-  }
-}
-
-addProducts(10);
-
-
 
 export default class BasicTable extends React.Component{
 
@@ -38,7 +21,8 @@ export default class BasicTable extends React.Component{
       page: 1,
       sizePerPageList: [5,10,15,20,25], //you can change the dropdown list for size per page
       sizePerPage: 10,  //which size per page you want to locate as default
-      paginationSize: 100
+      paginationSize: 100,
+      afterInsertRow: this.onAfterInsertRow.bind(this)
       //totalPages: 100
     };
   }
@@ -54,7 +38,8 @@ export default class BasicTable extends React.Component{
 
   componentDidMount() {
     console.log("in componentDidMount()")
-    AppointmentActionCreator.getAppointments(this.state.pageNumber, this.state.pageSize);
+    //AppointmentActionCreator.getAppointments(this.state.pageNumber, this.state.pageSize);
+    AppointmentActionCreator.getHealthVuAppointments(1, 1, 25);
     //this.dataSet = new TableDataSet(this.state.data);
     this.changeListener = this._onChange.bind(this);
     AppointmentStore.addChangeListener(this.changeListener);
@@ -75,39 +60,53 @@ export default class BasicTable extends React.Component{
 
   queryData(){
     this.state.pageNumber+=1;
-    AppointmentActionCreator.getAppointments(this.state.pageNumber, this.state.pageSize);
+    //AppointmentActionCreator.getAppointments(this.state.pageNumber, this.state.pageSize);
     //this.dataSet.setData(this.state.data);
+
+    AppointmentActionCreator.getHealthVuAppointments(1, 1, 25);
+    this.dataSet.setData(this.state.data);
+
   }
 
   onPageChange(page, sizePerPage) {
     //alert('page: ' + page + ', sizePerPage: ' + sizePerPage);
   }
+  onAfterInsertRow(row){
+    var newRowStr = "";
+
+    for(var prop in row){
+      newRowStr += prop+": " + row[prop] + " \n";
+    }
+    alert("The new row is:\n " + newRowStr);
+  }
 
 
   render(){
-    //var options = {
-    //  page: 1,
-    //  sizePerPageList: [5,10,15,20,25], //you can change the dropdown list for size per page
-    //  sizePerPage: 5,  //which size per page you want to locate as default
-    //  paginationSize: 10
-    //}
+    //var dateFormat = require('dateformat');
+    function nameFormatter(cell, row){
+      return cell + " " + row.patientLast;
+    }
+    function dateFormatter(cell, row){
+      var date = Date.parse(cell);
+      return dateFormat(date, "dddd, mmmm dS, yyyy, h:MM:ss TT");
+      //return date;
+    }
     return (
       <div>
         <button onClick={this.queryData.bind(this)}>Get More Data</button>
-        <label htmlFor="startDate">Start Date</label>
-        <input type="date" valueLink={this.linkState('startDate')} className="form-control" id="startDate" placeholder="Start Date" />
-        <label htmlFor="endDate">End Date</label>
-        <input type="date" valueLink={this.linkState('endDate')} className="form-control" id="endDate" placeholder="End Date" />
         <BootstrapTable data={this.state.data}
+          insertRow={false}
           pagination={false}
           search={true}
           options={this.options}
           height="240">
-          <TableHeaderColumn dataField="id" isKey={true} dataSort={true}>Appointment ID</TableHeaderColumn>
-          <TableHeaderColumn dataField="patientName" dataSort={true}>Patient Name</TableHeaderColumn>
-          <TableHeaderColumn type="date" dataField="appointmentDate" dataSort={true}>Date</TableHeaderColumn>
-          <TableHeaderColumn type="text" dataField="location" dataSort={true}>Location</TableHeaderColumn>
-          <TableHeaderColumn type="date" dataField="status" dataSort={true}>Status</TableHeaderColumn>
+
+          <TableHeaderColumn dataField="patientFirst" dataSort={true} dataFormat={nameFormatter}>Patient Name</TableHeaderColumn>
+          <TableHeaderColumn type="date" dataField="appointmentDateTime" dataFormat={dateFormatter} dataSort={true}>Appointment Date</TableHeaderColumn>
+          <TableHeaderColumn type="text" dataField="appointmentLocationName" dataSort={true}>Appointment Location</TableHeaderColumn>
+
+          <TableHeaderColumn type="text" dataField="patientLast" hidden={true}>Last Name</TableHeaderColumn>
+          <TableHeaderColumn dataField="appointmentId" isKey={true} hidden={true}>Appointment ID</TableHeaderColumn>
         </BootstrapTable>
       </div>
     );

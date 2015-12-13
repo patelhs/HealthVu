@@ -1,7 +1,8 @@
 
 import request from 'request';
 import bluebird from 'bluebird';
-import { APPOINTMENTS_API_URL } from '../constants/AppConstants';
+import querystring from 'queryString';
+import { APPOINTMENTS_API_URL, GET_APPOINTMENTS_URL } from '../constants/AppConstants';
 
 class AppointmentService {
 
@@ -13,6 +14,47 @@ class AppointmentService {
           body: {pageNumber, pageSize},
           json: true
         },
+        (err, response, body) => {
+          if(err){
+            return reject(err);
+          }
+          if(response.statusCode >= 400){
+            return reject(body);
+          }
+          return resolve(body);
+        }
+      );
+    });
+  }
+
+  getAppointments(practiceId, resultPage, maxResults){
+    var id_token = localStorage.getItem("jv_jwt");
+    //console.log("before sending request: " + id_token);
+
+    var formData = {
+      practiceId: 1,
+      resultPage: 1,
+      maxResults: 25
+    };
+    var data = querystring.stringify(formData);
+    var contentLength = data.length;
+    var headers = {
+      'auth-token': id_token,
+      'Content-Type': 'application/x-www-form-urlencoded',
+      'Accept': 'application/json'
+
+    }
+
+
+    return new bluebird((resolve, reject) => {
+      request.post(
+        {
+          url: GET_APPOINTMENTS_URL,
+          headers: headers,
+          body: data,
+          json: true,
+          withCredentials: false
+      },
         (err, response, body) => {
           if(err){
             return reject(err);

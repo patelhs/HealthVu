@@ -19,8 +19,9 @@ class AppointmentStore extends BaseStore {
     switch(action.type) {
 
       case ActionTypes.REQUEST_APPOINTMENT_DATA_SUCCESS:
+        console.log(action.body.items);
         this._appointments = action.body.items;
-        localStorage.setItem("appointments", this._appointments);
+//        localStorage.setItem("appointments", this._appointments);
         this._error = null;
         this.emitChange();
         break;
