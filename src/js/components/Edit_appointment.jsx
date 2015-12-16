@@ -5,11 +5,17 @@ import AppointmentStore from '../stores/AppointmentStore';
 import ReactMixin from 'react-mixin';
 import dateFormat from 'dateformat';
 
+import { Form, ValidatedInput } from 'react-bootstrap-validation';
+
+// There's also a wrapper for radio inputs that react-bootstrap
+// doesn't (yet) have
+import { Radio, RadioGroup } from 'react-bootstrap-validation';
+
 
 export default class EditAppointent extends React.Component {
-
   constructor(props) {
     super(props);
+
     this.state = {
       disabled: true,
       style: null,
@@ -20,52 +26,108 @@ export default class EditAppointent extends React.Component {
       loading: false,
       errors: {}
     }
+
   }
 
-  resetValidation() {
-    this.setState({
-      disabled: true,
-      style: null
-    });
+  _handleValidSubmit(values) {
+    // Values is an object containing all values
+    // from the inputs
+
   }
 
-  validationState() {
-    let length = this.refs.input.getValue().length;
-    //
-    let style = 'danger';
-    //
-    //let length = this.state.value.length;
-    if (length > 10) style = 'success';
-    else if (length > 5) style = 'warning';
-    //
-    //if (length > 10) style = 'success';
-    //else if (length > 5) style = 'warning';
-    //
-    let disabled = style !== 'success';y
-
-    return {style, disabled};
+  _handleInvalidSubmit(errors, values) {
+    // Errors is an array containing input names
+    // that failed to validate
   }
 
-  handleChange() {
-    //this.setState({
-    //  email: this.refs.userEmail.getValue()
-    //});
-    this.setState( this.validationState() );
+  _loadForm(){
+    alert("loading");
   }
+
 
 render(){
   return (
-    <form>
-      <Input type="text" ref="input" onChange={this.handleChange.bind(this)} />
+    <Form
 
-      <Input type="date" ref="submitDate" onChange={this.handleChange.bind(this)} />
+      onload={this._loadForm.bind(this)}
+      // Supply callbacks to both valid and invalid
+      // submit attempts
+      onValidSubmit={this._handleValidSubmit.bind(this)}
+      onInvalidSubmit={this._handleInvalidSubmit.bind(this)}>
 
 
+      <ValidatedInput
+        type='text'
+        label='Email'
+        // Each input that you need validated should have
+        // the "name" prop
+        name='email'
+        // Validation rules separated with comma
+        validate='required,isEmail'
+        // Error messages for each error type
+        errorHelp={{
+          required: 'Please enter your email',
+          isEmail: 'Email is invalid'
+        }}
+      />
 
-      <ButtonInput bsSize="small">Child Text</ButtonInput>
-      <ButtonInput type="reset" bsStyle="primary" onClick={this.resetValidation.bind(this)} />
-      <ButtonInput type="submit" value="Submit Your Input" bsStyle={this.state.style} bsSize="large" disabled={this.state.disabled} />
-    </form>
+      <ValidatedInput
+        type='password'
+        name='password'
+        label='Password'
+        // You can pass params to validation rules
+        validate='required,isLength:6:60'
+        errorHelp={{
+          required: 'Please specify a password',
+          isLength: 'Password must be at least 6 characters'
+        }}
+      />
+
+      <ValidatedInput
+        type='password'
+        name='password-confirm'
+        label='Confirm Password'
+        // Validate can be a function as well
+        validate={(val, context) => val === context.password}
+        // If errorHelp property is a string, then it is used
+        // for all possible validation errors
+        errorHelp='Passwords do not match'
+      />
+
+                {/* Custom component to supply a couple of bootstrap
+                 wrappers around radio inputs to look pretty */}
+     <ValidatedInput
+       type="date"
+       name="mylist"
+       label="my list"
+       validate = 'required'
+       errorHelp='date is required'
+       />
+
+      <ValidatedInput type="select" label="Select" placeholder="select"
+        name="myselect" validate="required"  errorHelp="select is required">
+        <option value="select">Mr.</option>
+        <option value="other">...</option>
+      </ValidatedInput>
+
+      <ValidatedInput
+        type='checkbox'
+        name='agree'
+        label='I agree to the terms and conditions'
+        // Validation rules is easily extendable to fit
+        // your needs. There are only two custom rules,
+        // 'isChecked' and 'required', others are stock
+        // validator.js methods
+        validate='isChecked'
+      />
+
+      <ButtonInput
+        type='submit'
+        bsSize='large'
+        bsStyle='primary'
+        value='Register'
+      />
+    </Form>
   );
 }
 }
