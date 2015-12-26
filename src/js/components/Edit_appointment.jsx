@@ -15,6 +15,7 @@ import { Radio, RadioGroup } from 'react-bootstrap-validation';
 export default class EditAppointent extends React.Component {
   constructor(props) {
     super(props);
+    console.log("ON Edit: " + props.appointment);
 
     this.state = {
       disabled: true,
@@ -42,6 +43,7 @@ export default class EditAppointent extends React.Component {
 
   _loadForm(){
     alert("loading");
+
   }
 
 
@@ -55,13 +57,14 @@ render(){
       onValidSubmit={this._handleValidSubmit.bind(this)}
       onInvalidSubmit={this._handleInvalidSubmit.bind(this)}>
 
-
       <ValidatedInput
         type='text'
         label='Email'
+
         // Each input that you need validated should have
         // the "name" prop
         name='email'
+        id='email'
         // Validation rules separated with comma
         validate='required,isEmail'
         // Error messages for each error type

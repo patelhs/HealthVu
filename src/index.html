@@ -7,19 +7,21 @@
 
   <link rel="stylesheet" href="styles/main.css">
   <link rel="stylesheet" href="styles/jv.css">
-
-  <link rel="stylesheet" href="styles/bootstrap_3.3.2.css">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
   <link rel="stylesheet" href="styles/react-bootstrap-table-all.css">
+
+
+
   <script src="https://apis.google.com/js/platform.js" async defer></script>
   <script src="http://code.jquery.com/jquery-2.1.3.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 
   <script src="https://apis.google.com/js/platform.js?onload=triggerGoogleLoaded" async defer></script>
   <script type="text/javascript">
     function triggerGoogleLoaded() {
       window.dispatchEvent(new Event('google-loaded'));
       gapi.load('auth2', function() {
-        //gapi.auth2.init();
+        gapi.auth2.init();
         //gapi.auth2.getAuthInstance()
       });
     }

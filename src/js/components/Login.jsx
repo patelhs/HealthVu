@@ -30,7 +30,7 @@ export default class Login extends React.Component {
         <form role="form">
         <div className="form-group">
           <label htmlFor="username">Username</label>
-          <input type="text" valueLink={this.linkState('user')} className="form-control" id="username" placeholder="Username" />
+          <input type="text" valueLink={this.linkState('user')} className="form-control" id="username" placeholder="Username"  />
         </div>
         <div className="form-group">
           <label htmlFor="password">Password</label>
