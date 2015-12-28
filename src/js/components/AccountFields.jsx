@@ -1,58 +1,123 @@
 import React from 'react';
 import ReactMixin from 'react-mixin';
+import {Input, Button, ButtonInput} from 'react-bootstrap';
 import { Route, RouteHandler, Link } from 'react-router';
+import { Form, ValidatedInput } from 'react-bootstrap-validation';
 
 export default class AccountFields extends React.Component {
   constructor(props) {
         super(props);
-        this.state = {
-            name: props.fieldValues.name
-        };
+
+    this.state = {
+      disabled: true,
+      style: null,
+      value: "",
+      username: "",
+      email: "",
+      password: "",
+      loading: false,
+      errors: {}
+    }
   }
 
-  nextStep(e) {
-    e.preventDefault();
-    console.log(this);
 
-    //alert(this.props.fieldValues.name);
-    // Get values via this.refs
+  _handleValidSubmit(values) {
+    // Values is an object containing all values
+    // from the inputs
 
-    var data = {
-      name     : this.refs.name.getDOMNode().value,
-      password : this.refs.password.getDOMNode().value,
-      email    : this.refs.email.getDOMNode().value
-    };
-
-    this.props.saveValues(data);
+    this.props.saveValues(values);
     this.props.nextStep();
+  }
+
+  _handleInvalidSubmit(errors, values) {
+    // Errors is an array containing input names
+    // that failed to validate
+    console.log("testing2");
+
+  }
+
+  _loadForm(){
+    alert("loading");
   }
 
    render() {
     return (
-      <div>
-        <ul className="form-fields center_div">
-          <li>
-            <label>Full Name</label>
-            <input className="input -primary" type="text" ref="name" defaultValue={this.props.fieldValues.name} />
+      <Form
+
+        onload={this._loadForm.bind(this)}
+        // Supply callbacks to both valid and invalid
+        // submit attempts
+        onValidSubmit={this._handleValidSubmit.bind(this)}
+        onInvalidSubmit={this._handleInvalidSubmit.bind(this)}>
+
+        <ValidatedInput
+          type='text'
+          name='name'
+          label='Full Name'
+          // You can pass params to validation rules
+          validate='required,isLength:3:60'
+          errorHelp={{
+          required: 'Please enter your full name',
+          isLength: 'Name must be at least 3 characters long'
+        }}
+          />
+
+        <ValidatedInput
+          type='text'
+          name='email'
+          label='Email'
+          //className='input -primary'
+          //placeholder="testing"
+          // Each input that you need validated should have
+          // the "name" prop
+          // Validation rules separated with comma
+          validate='required,isEmail'
+          // Error messages for each error type
+          errorHelp={{
+          required: 'Please enter your email',
+          isEmail: 'Email is invalid'
+        }}
+          />
+
+        <ValidatedInput
+          type='password'
+          name='password'
+          label='Password'
+          // You can pass params to validation rules
+          validate='required,isLength:6:60'
+          errorHelp={{
+          required: 'Please specify a password',
+          isLength: 'Password must be at least 6 characters'
+        }}
+          />
+
+        <ValidatedInput
+          type='password'
+          name='password-confirm'
+          label='Confirm Password'
+          // Validate can be a function as well
+          validate={(val, context) => val === context.password}
+          // If errorHelp property is a string, then it is used
+          // for all possible validation errors
+          errorHelp='Passwords do not match'
+          />
+
+        <ButtonInput
+          type='submit'
+          bsSize='large'
+          bsStyle='primary'
+          value='Register'
+          />
+
+
+        <ul className="form-fields center_div"> 
+          <li> 
+            <label>Full Name</label> 
+            <input className="input -primary" type="text" ref="name" defaultValue={this.props.fieldValues.name} /> 
           </li>
-          <li>
-            <label>Email Address</label>
-            <input className="input -primary" type="email" ref="email" defaultValue={this.props.fieldValues.email} />
-          </li>
-          <li>
-            <label>Password</label>
-            <input className="input -primary" type="password" ref="password" defaultValue={this.props.fieldValues.password} />
-          </li>
-          <li>
-            <label>Confirm Password</label>
-            <input className="input -primary" type="password" ref="password" defaultValue={this.props.fieldValues.password} />
-          </li>
-          <li>
-            <button className="btn -continueBtn center-block" onClick={this.nextStep.bind(this)}>Continue</button>
-          </li>
-          <Link className="btn -backBtn pull-left" to="login">Login</Link>
-        </ul>
-      </div>
+          </ul>
+
+      </Form>
     )
   }
 }

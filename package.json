@@ -34,6 +34,7 @@
     "react": "^0.14.3",
     "react-bootstrap": "^0.28.1",
     "react-bootstrap-table": "^1.2.15",
+    "react-bootstrap-validation": "^0.1.10",
     "react-data-components": "^0.6.0",
     "react-mixin": "^1.1.0",
     "react-router": "^0.13.3",
