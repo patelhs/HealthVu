@@ -29,7 +29,7 @@ export default class GoogleLoginButton extends React.Component{
     let transitionPath = RouterStore.nextTransitionPath || '/';
 
     //trigger router change
-    alert("IN google login");
+    //alert("IN google login");
     console.log("&*&*&* App onLoginChange event: loggedIn=", userLoggedInState.userLoggedIn,
       "nextTransitionPath=", transitionPath);
 

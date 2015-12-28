@@ -28,6 +28,8 @@
     "fbjs": "^0.3.2",
     "flux": "^2.0.3",
     "forms": "^1.1.4",
+    "joi": "^7.0.1",
+    "joi-validation-strategy": "^0.3.2",
     "jwt-decode": "^1.1.0",
     "keymirror": "^0.1.1",
     "object-assign": "^2.0.0",
@@ -38,6 +40,7 @@
     "react-data-components": "^0.6.0",
     "react-mixin": "^1.1.0",
     "react-router": "^0.13.3",
+    "react-validation-mixin": "^5.3.2",
     "request": "^2.57.0"
   },
   "devDependencies": {

@@ -7,6 +7,8 @@ import dateFormat from 'dateformat';
 
 import AppointmentActionCreator from '../actions/AppointmentActionCreators';
 
+import EditAppointent from './Edit_appointment';
+
 export default class BasicTable extends React.Component{
 
   constructor(props) {
@@ -25,6 +27,14 @@ export default class BasicTable extends React.Component{
       afterInsertRow: this.onAfterInsertRow.bind(this)
       //totalPages: 100
     };
+
+    this.selectRowProp = {
+      mode: "radio",
+      clickToSelect: true,
+      bgColor: "rgb(238, 193, 213)",
+      onSelect: this.onRowSelect.bind(this)
+    };
+
   }
 
   _getAppointments() {
@@ -49,7 +59,8 @@ export default class BasicTable extends React.Component{
   _onChange() {
     console.log("in _onChange")
     this.setState({
-      data: AppointmentStore.appointments
+      data: AppointmentStore.appointments,
+      selected: AppointmentStore.appointment
     });
   }
 
@@ -80,8 +91,13 @@ export default class BasicTable extends React.Component{
     alert("The new row is:\n " + newRowStr);
   }
 
+  onRowSelect(row, isSelected){
+    $(".modal-body #email").val(row.patientEmail);
+    $('#myModal').modal('show');
+  }
 
   render(){
+
     //var dateFormat = require('dateformat');
     function nameFormatter(cell, row){
       return cell + " " + row.patientLast;
@@ -91,10 +107,21 @@ export default class BasicTable extends React.Component{
       return dateFormat(date, "dddd, mmmm dS, yyyy, h:MM:ss TT");
       //return date;
     }
+    function statusFormatter(cell, row){
+      if (row.isActive){
+        return '<button type="button" class="btn btn-info"><i class="glyphicon"></i><span>Active</span></button>';
+      }
+    }
     return (
       <div>
+        <button type="button" className="open-AddBookDialog btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Add Appointment</button>
+      {/*
         <button onClick={this.queryData.bind(this)}>Get More Data</button>
+        <button onClick={this.addAppointment.bind(this)}> Add </button>
+       */}
+
         <BootstrapTable data={this.state.data}
+          selectRow={this.selectRowProp}
           insertRow={false}
           pagination={false}
           search={true}
@@ -104,10 +131,28 @@ export default class BasicTable extends React.Component{
           <TableHeaderColumn dataField="patientFirst" dataSort={true} dataFormat={nameFormatter}>Patient Name</TableHeaderColumn>
           <TableHeaderColumn type="date" dataField="appointmentDateTime" dataFormat={dateFormatter} dataSort={true}>Appointment Date</TableHeaderColumn>
           <TableHeaderColumn type="text" dataField="appointmentLocationName" dataSort={true}>Appointment Location</TableHeaderColumn>
+          <TableHeaderColumn dataFormat={statusFormatter}>Status</TableHeaderColumn>
 
           <TableHeaderColumn type="text" dataField="patientLast" hidden={true}>Last Name</TableHeaderColumn>
           <TableHeaderColumn dataField="appointmentId" isKey={true} hidden={true}>Appointment ID</TableHeaderColumn>
         </BootstrapTable>
+
+        <div id="myModal" className="modal fade" role="dialog">
+          <div className="modal-dialog">
+            <div className="modal-content">
+              <div class="modal-header">
+                <button type="button" className="close" data-dismiss="modal">&times;</button>
+                <h4 className="modal-title">Add/Edit Appointment</h4>
+              </div>
+              <div className="modal-body">
+                <EditAppointent appointment={this.state.selected} />
+              </div>
+              <div className="modal-footer">
+                <button type="button" className="btn btn-default" data-dismiss="modal">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     );
   }
