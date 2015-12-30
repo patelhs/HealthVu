@@ -20,6 +20,15 @@ export default {
       success: ActionTypes.REQUEST_APPOINTMENT_DATA_SUCCESS,
       failure: ActionTypes.REQUEST_APPOINTMENT_DATA_ERROR
     }, { practiceId, resultPage, maxResults });
+  },
+
+  saveAppointment: (appointment) => {
+    let promise = AppointmentService.saveAppointment(appointment);
+    dispatchAsync(promise, {
+      request: ActionTypes.SAVE_APPOINTMENT_DATA,
+      success: ActionTypes.SAVE_APPOINTMENT_DATA_SUCCESS,
+      failure: ActionTypes.SAVE_APPOINTMENT_DATA_ERROR
+    }, {appointment});
   }
 }
 

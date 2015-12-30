@@ -4,14 +4,10 @@ import {BootstrapTable, TableHeaderColumn, TableDataSet} from 'react-bootstrap-t
 import AppointmentStore from '../stores/AppointmentStore';
 import ReactMixin from 'react-mixin';
 import dateFormat from 'dateformat';
-
-
 import { Form, ValidatedInput } from 'react-bootstrap-validation';
-
-// There's also a wrapper for radio inputs that react-bootstrap
-// doesn't (yet) have
 import { Radio, RadioGroup } from 'react-bootstrap-validation';
 
+import AppointmentActionCreator from '../actions/AppointmentActionCreators';
 
 export default class EditAppointent extends React.Component {
   constructor(props) {
@@ -28,13 +24,17 @@ export default class EditAppointent extends React.Component {
       loading: false,
       errors: {}
     }
-
   }
 
   _handleValidSubmit(values) {
     // Values is an object containing all values
     // from the inputs
-    console.log(values);
+    //console.log(values);
+    console.log("before save");
+    AppointmentActionCreator.saveAppointment(values);
+    console.log("after save");
+    $('#myModal').modal('hide');
+    AppointmentActionCreator.getHealthVuAppointments(1, 1, 25);
   }
 
   _handleInvalidSubmit(errors, values) {
@@ -226,7 +226,7 @@ render(){
         type='submit'
         bsSize='large'
         bsStyle='primary'
-        value='Register'
+        value='Save'
       />
     </Form>
   );

@@ -128,6 +128,22 @@ export default class BasicTable extends React.Component{
 
   render(){
 
+    $(document).on('click', '.open-AddBookDialog', function(){
+      $(".modal-body #patientEmail").val('');
+      $(".modal-body #providerPrefix").val('');
+      $(".modal-body #providerFirst").val('');
+      $(".modal-body #providerMiddle").val('');
+      $(".modal-body #providerLast").val('');
+      $(".modal-body #providerPrefix").val('');
+      $(".modal-body #appointmentLocationName").val('');
+      $(".modal-body #messageDeliveryPreference").val('');
+      $(".modal-body #patientMobile").val('');
+      $(".modal-body #patientFirst").val('');
+      $(".modal-body #patientLast").val('');
+      $(".modal-body #appointmentId").val('');
+      $(".modal-body #appointmentDateTime").val('');
+
+    });
     //var dateFormat = require('dateformat');
     function nameFormatter(cell, row){
       return cell + " " + row.patientLast;
