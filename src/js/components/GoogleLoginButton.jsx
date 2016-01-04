@@ -62,6 +62,9 @@ export default class GoogleLoginButton extends React.Component{
       'height': 50,
       'longtitle': true,
       'theme': 'light',
+      'align': 'center',
+      'display': 'inline-block',
+
       'onsuccess': this.onSignIn.bind(this)
     });
   }
@@ -76,7 +79,8 @@ export default class GoogleLoginButton extends React.Component{
   render(){
     let displayText = "Sign in with Google";
     return (
-      <div id="my-signin2"></div>
+      <div id="my-signin2" className="googleButton"></div>
+
     );
   }
 }

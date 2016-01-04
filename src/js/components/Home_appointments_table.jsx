@@ -1,5 +1,5 @@
 import React from 'react/addons';
-import {Input} from 'react-bootstrap';
+import {Input, DatePicker} from 'react-bootstrap';
 import {BootstrapTable, TableHeaderColumn, TableDataSet} from 'react-bootstrap-table';
 import AppointmentStore from '../stores/AppointmentStore';
 import ReactMixin from 'react-mixin';
@@ -92,12 +92,58 @@ export default class BasicTable extends React.Component{
   }
 
   onRowSelect(row, isSelected){
-    $(".modal-body #email").val(row.patientEmail);
+
+    console.log(row.patientFirst);
+
+    $(".modal-body #patientEmail").val(row.patientEmail);
+    $(".modal-body #providerPrefix").val(row.providerPrefix);
+    $(".modal-body #providerFirst").val(row.providerFirst);
+    $(".modal-body #providerMiddle").val(row.providerMiddle);
+    $(".modal-body #providerLast").val(row.providerLast);
+    $(".modal-body #providerPrefix").val(row.providerPrefix);
+    $(".modal-body #appointmentLocationName").val(row.appointmentLocationName);
+    $(".modal-body #messageDeliveryPreference").val(row.messageDeliveryPreference);
+    $(".modal-body #patientMobile").val(row.patientMobile);
+    $(".modal-body #patientFirst").val(row.patientFirst);
+    $(".modal-body #patientLast").val(row.patientLast);
+    $(".modal-body #appointmentId").val(row.appointmentId);
+    var date = new Date(row.appointmentDateTime);
+    console.log(date);
+    date = date.toLocaleString();
+    var d = dateFormat(date, "yyyy-mm-dd");
+    var t = dateFormat(date, 'hh:MM:ss');
+    var dt = d + "T" + t;
+    console.log(dt);
+    //date = '2015-12-08T12:55:00'
+    $(".modal-body #appointmentDateTime").val(dt);
+
+
+    if (row.isActive){
+      $(".modal-body #isActive").val('true');
+    }else{
+      $(".modal-body #isActive").val('false');
+    }
     $('#myModal').modal('show');
   }
 
   render(){
 
+    $(document).on('click', '.open-AddBookDialog', function(){
+      $(".modal-body #patientEmail").val('');
+      $(".modal-body #providerPrefix").val('');
+      $(".modal-body #providerFirst").val('');
+      $(".modal-body #providerMiddle").val('');
+      $(".modal-body #providerLast").val('');
+      $(".modal-body #providerPrefix").val('');
+      $(".modal-body #appointmentLocationName").val('');
+      $(".modal-body #messageDeliveryPreference").val('');
+      $(".modal-body #patientMobile").val('');
+      $(".modal-body #patientFirst").val('');
+      $(".modal-body #patientLast").val('');
+      $(".modal-body #appointmentId").val('');
+      $(".modal-body #appointmentDateTime").val('');
+
+    });
     //var dateFormat = require('dateformat');
     function nameFormatter(cell, row){
       return cell + " " + row.patientLast;
@@ -111,6 +157,9 @@ export default class BasicTable extends React.Component{
       if (row.isActive){
         return '<button type="button" class="btn btn-info"><i class="glyphicon"></i><span>Active</span></button>';
       }
+    }
+    function onAdd(){
+      console.log("onadd");
     }
     return (
       <div>
