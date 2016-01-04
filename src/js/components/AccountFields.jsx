@@ -106,16 +106,8 @@ export default class AccountFields extends React.Component {
           type='submit'
           bsSize='large'
           bsStyle='primary'
-          value='Register'
+          value='Continue'
           />
-
-
-        <ul className="form-fields center_div"> 
-          <li> 
-            <label>Full Name</label> 
-            <input className="input -primary" type="text" ref="name" defaultValue={this.props.fieldValues.name} /> 
-          </li>
-          </ul>
 
       </Form>
     )
