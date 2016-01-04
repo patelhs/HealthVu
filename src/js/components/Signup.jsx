@@ -112,7 +112,7 @@ export default class Signup extends React.Component {
     return (
       <main>
         <span className="progress-step center-block">Step {this.state.step}</span>
-        <progress className="progress center-block" style={style}></progress>
+        <progress className="progress  center-block" style={style}></progress>
         {this.showStep()}
 
       </main>

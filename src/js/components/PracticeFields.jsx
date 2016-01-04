@@ -38,7 +38,7 @@ class PracticeFields extends React.Component {
 
   render() {
     return (
-      <div className="container">
+      <div className="container center">
         <Form
           onload={this._loadForm.bind(this)}
           // Supply callbacks to both valid and invalid
@@ -47,10 +47,8 @@ class PracticeFields extends React.Component {
           onInvalidSubmit={this._handleInvalidSubmit.bind(this)}>
 
           <div className="row">
-            <div className='col-md-6'>
-              <div className="form-group">
-                <h2>Practice Details</h2>
-              </div>
+            <div className='col-md-5 '>
+
               <div className="form-group">
                 <ValidatedInput
                   className="form-control"
@@ -110,10 +108,10 @@ class PracticeFields extends React.Component {
                 </ValidatedInput>
               </div>
             </div>
-            <div className='col-md-6'>
-              <div className="form-group">
-                <h2>Practice Location</h2>
+            <div className='col-xs-1'>
               </div>
+            <div className='col-md-5'>
+
               <div className="form-group">
                 <ValidatedInput
                   type='text'
@@ -128,30 +126,33 @@ class PracticeFields extends React.Component {
               </div>
             </div>
           </div>
-          <div className="row">
 
-            <div className='col-md-3'>
+          <div className="row">
+            <div className="center">
+            <div className="center -button">
               <div className="form-group">
-                <ButtonInput
-                  type='button'
-                  bsSize='large'
-                  bsStyle='primary'
-                  value='Back'
-                  onClick={this.props.previousStep.bind(this)}
-                />
+
+                <div className="form-group">
+                  <ButtonInput
+                    type='submit'
+                    bsSize='large'
+                    bsStyle='primary'
+                    value='Continue'
+                    />
+
+                  <ButtonInput
+                    type='button'
+                    bsSize='large'
+                    bsStyle='secondary'
+                    value='Back'
+                    onClick={this.props.previousStep.bind(this)}
+                    />
               </div>
-            </div>
-            <div className='col-md-3'>
-            </div>
-            <div className='col-md-6'>
-              <div className="form-group">
-                <ButtonInput
-                  type='submit'
-                  bsSize='large'
-                  bsStyle='primary'
-                  value='Continue'
-                />
+
               </div>
+              </div>
+
+
             </div>
           </div>
         </Form>

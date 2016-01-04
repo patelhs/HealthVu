@@ -110,10 +110,12 @@ h2 {
 .progress {
   margin-bottom: 20px;
   transition: all 0.2s ease;
+
 }
 
 .progress-step {
   display: block;
+  color: $grey;
   font-size: 12px;
   font-weight: bold;
   margin-bottom: 18px;
@@ -288,6 +290,15 @@ html, body{
   text-align: center; }
 .googleButton{
   display: inline-block;
+}
+
+.center{
+  margin: 0 auto;
+  width: 65%;
+
+  &.-button{
+    width: 60%;
+  }
 }
 
 //testing

@@ -3,9 +3,11 @@
   <component name="ChangeListManager">
     <list default="true" id="c53c3e3a-0b47-4a3f-bb1b-a4558f9bfbb9" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/js/components/AccountFields.jsx" afterPath="$PROJECT_DIR$/src/js/components/AccountFields.jsx" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/js/components/BillingFields.jsx" afterPath="$PROJECT_DIR$/src/js/components/BillingFields.jsx" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/js/components/PracticeFields.jsx" afterPath="$PROJECT_DIR$/src/js/components/PracticeFields.jsx" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/js/components/Signup.jsx" afterPath="$PROJECT_DIR$/src/js/components/Signup.jsx" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/styles/bootstrap_3.3.2.css" afterPath="$PROJECT_DIR$/src/styles/bootstrap_3.3.2.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/index.html" afterPath="$PROJECT_DIR$/src/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/styles/jv.scss" afterPath="$PROJECT_DIR$/src/styles/jv.scss" />
     </list>
     <ignored path="HealthVueCode.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -30,26 +32,47 @@
         <entry file="file://$PROJECT_DIR$/src/js/components/Home_appointments_table.jsx">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="145" column="20" selection-start-line="145" selection-start-column="20" selection-end-line="145" selection-end-column="20" />
+              <caret line="194" column="20" selection-start-line="194" selection-start-column="20" selection-end-line="194" selection-end-column="20" />
               <folding>
-                <marker date="1451334283000" expanded="true" signature="3304:5350" placeholder="&lt;xml/&gt;" />
-                <marker date="1451334283000" expanded="true" signature="3636:4609" placeholder="&lt;xml/&gt;" />
-                <marker date="1451334283000" expanded="true" signature="4619:5337" placeholder="&lt;xml/&gt;" />
-                <marker date="1451334283000" expanded="true" signature="4685:5322" placeholder="&lt;xml/&gt;" />
-                <marker date="1451334283000" expanded="true" signature="4728:5305" placeholder="&lt;xml/&gt;" />
-                <marker date="1451334283000" expanded="true" signature="4774:4985" placeholder="&lt;xml/&gt;" />
-                <marker date="1451334283000" expanded="true" signature="5000:5118" placeholder="&lt;xml/&gt;" />
-                <marker date="1451334283000" expanded="true" signature="5133:5286" placeholder="&lt;xml/&gt;" />
+                <marker date="1451922075000" expanded="true" signature="5262:5268" placeholder="{...}" />
+                <marker date="1451922075000" expanded="true" signature="5288:7334" placeholder="&lt;xml/&gt;" />
+                <marker date="1451922075000" expanded="true" signature="5620:6593" placeholder="&lt;xml/&gt;" />
+                <marker date="1451922075000" expanded="true" signature="6603:7321" placeholder="&lt;xml/&gt;" />
+                <marker date="1451922075000" expanded="true" signature="6669:7306" placeholder="&lt;xml/&gt;" />
+                <marker date="1451922075000" expanded="true" signature="6712:7289" placeholder="&lt;xml/&gt;" />
+                <marker date="1451922075000" expanded="true" signature="6758:6969" placeholder="&lt;xml/&gt;" />
+                <marker date="1451922075000" expanded="true" signature="6984:7102" placeholder="&lt;xml/&gt;" />
+                <marker date="1451922075000" expanded="true" signature="7117:7270" placeholder="&lt;xml/&gt;" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AccountFields.jsx" pinned="false" current-in-tab="true">
+      <file leaf-file-name="AccountFields.jsx" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/js/components/AccountFields.jsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.29090908">
-              <caret line="56" column="0" selection-start-line="56" selection-start-column="0" selection-end-line="56" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="45" column="17" selection-start-line="45" selection-start-column="0" selection-end-line="46" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="BillingFields.jsx" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/js/components/BillingFields.jsx">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="153" column="16" selection-start-line="153" selection-start-column="16" selection-end-line="153" selection-end-column="16" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="PracticeFields.jsx" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/js/components/PracticeFields.jsx">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="148" column="22" selection-start-line="142" selection-start-column="18" selection-end-line="148" selection-end-column="22" />
               <folding />
             </state>
           </provider>
@@ -58,18 +81,28 @@
       <file leaf-file-name="bootstrap_3.3.2.css" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/styles/bootstrap_3.3.2.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="2556" column="0" selection-start-line="2556" selection-start-column="0" selection-end-line="2556" selection-end-column="0" />
+            <state vertical-scroll-proportion="-11.518518">
+              <caret line="5022" column="22" selection-start-line="5021" selection-start-column="2" selection-end-line="5022" selection-end-column="22" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="jv.scss" pinned="false" current-in-tab="false">
+      <file leaf-file-name="jv.scss" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/styles/jv.scss">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-0.0">
-              <caret line="228" column="0" selection-start-line="228" selection-start-column="0" selection-end-line="228" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.48064086">
+              <caret line="119" column="8" selection-start-line="119" selection-start-column="0" selection-end-line="120" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Signup.jsx" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/js/components/Signup.jsx">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="114" column="38" selection-start-line="114" selection-start-column="38" selection-end-line="114" selection-end-column="38" />
               <folding />
             </state>
           </provider>
@@ -79,8 +112,10 @@
         <entry file="file://$PROJECT_DIR$/dist/styles/jv.css">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="38" column="24" selection-start-line="38" selection-start-column="24" selection-end-line="38" selection-end-column="24" />
-              <folding />
+              <caret line="57" column="0" selection-start-line="57" selection-start-column="0" selection-end-line="57" selection-end-column="0" />
+              <folding>
+                <marker date="1451942878000" expanded="true" signature="1047:1103" placeholder="{...}" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -89,8 +124,12 @@
         <entry file="file://$PROJECT_DIR$/src/js/stores/AppointmentStore.js">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="17" column="30" selection-start-line="17" selection-start-column="30" selection-end-line="17" selection-end-column="30" />
-              <folding />
+              <caret line="21" column="30" selection-start-line="21" selection-start-column="30" selection-end-line="21" selection-end-column="30" />
+              <folding>
+                <marker date="1451922075000" expanded="true" signature="210:1260" placeholder="{...}" />
+                <marker date="1451922075000" expanded="true" signature="432:1042" placeholder="{...}" />
+                <marker date="1451922075000" expanded="true" signature="458:1037" placeholder="{...}" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -99,16 +138,10 @@
         <entry file="file://$PROJECT_DIR$/src/js/components/Edit_appointment.jsx">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="7" column="53" selection-start-line="7" selection-start-column="44" selection-end-line="7" selection-end-column="53" />
+              <caret line="4" column="37" selection-start-line="4" selection-start-column="37" selection-end-line="4" selection-end-column="37" />
               <folding>
-                <marker date="1451334283000" expanded="true" signature="1179:3640" placeholder="&lt;xml/&gt;" />
-                <marker date="1451334283000" expanded="true" signature="1430:1870" placeholder="&lt;xml/&gt;" />
-                <marker date="1451334283000" expanded="true" signature="1878:2210" placeholder="&lt;xml/&gt;" />
-                <marker date="1451334283000" expanded="true" signature="2218:2590" placeholder="&lt;xml/&gt;" />
-                <marker date="1451334283000" expanded="true" signature="2731:2884" placeholder="&lt;xml/&gt;" />
-                <marker date="1451334283000" expanded="true" signature="2892:3145" placeholder="&lt;xml/&gt;" />
-                <marker date="1451334283000" expanded="true" signature="3153:3503" placeholder="&lt;xml/&gt;" />
-                <marker date="1451334283000" expanded="true" signature="3511:3628" placeholder="&lt;xml/&gt;" />
+                <marker date="1451922075000" expanded="true" signature="6508:6518" placeholder="&lt;xml/&gt;" />
+                <marker date="1451922075000" expanded="true" signature="6508:6530" placeholder="&lt;xml/&gt;" />
               </folding>
             </state>
           </provider>
@@ -122,12 +155,9 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/js/components/BillingFields.jsx" />
-        <option value="$PROJECT_DIR$/src/js/components/PracticeFields.jsx" />
         <option value="$PROJECT_DIR$/node_modules/react-bootstrap-table/README.md" />
         <option value="$PROJECT_DIR$/dist/index.html" />
         <option value="$PROJECT_DIR$/dist/js/build.js" />
-        <option value="$PROJECT_DIR$/src/js/components/Signup.jsx" />
         <option value="$PROJECT_DIR$/package.json" />
         <option value="$PROJECT_DIR$/src/js/dispatchers/AppDispatcher.js" />
         <option value="$PROJECT_DIR$/src/js/actions/LoginActionCreators.js" />
@@ -149,9 +179,12 @@
         <option value="$PROJECT_DIR$/src/js/components/Edit_appointment.jsx" />
         <option value="$PROJECT_DIR$/src/js/components/Home_appointments_table.jsx" />
         <option value="$PROJECT_DIR$/src/index.html" />
-        <option value="$PROJECT_DIR$/src/styles/jv.scss" />
         <option value="$PROJECT_DIR$/src/js/components/AccountFields.jsx" />
+        <option value="$PROJECT_DIR$/src/js/components/PracticeFields.jsx" />
+        <option value="$PROJECT_DIR$/src/js/components/BillingFields.jsx" />
         <option value="$PROJECT_DIR$/src/styles/bootstrap_3.3.2.css" />
+        <option value="$PROJECT_DIR$/src/js/components/Signup.jsx" />
+        <option value="$PROJECT_DIR$/src/styles/jv.scss" />
       </list>
     </option>
   </component>
@@ -168,7 +201,7 @@
     <order />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="width" value="1253" />
+    <option name="width" value="1281" />
     <option name="height" value="900" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
@@ -336,8 +369,8 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
       <pane id="Scratches" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -413,29 +446,50 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="0" width="1253" height="900" extended-state="0" />
-    <editor active="false" />
+    <frame x="0" y="0" width="1281" height="900" extended-state="0" />
+    <editor active="true" />
     <layout>
       <window_info id="Gulp" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2793296" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.31381732" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+    </layout>
+    <layout-to-restore>
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="true" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Gulp" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.31381732" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-    </layout>
+    </layout-to-restore>
   </component>
   <component name="Vcs.Log.UiProperties">
     <option name="RECENTLY_FILTERED_USER_GROUPS">
@@ -458,14 +512,6 @@
     <entry file="file://$PROJECT_DIR$/src/styles/assets/bg.png">
       <provider selected="true" editor-type-id="images">
         <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/js/components/BillingFields.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="48" column="31" selection-start-line="48" selection-start-column="0" selection-end-line="49" selection-end-column="0" />
-          <folding />
-        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/styles/toastr.css">
@@ -507,14 +553,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.12727273">
           <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/js/components/Signup.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.27272728">
-          <caret line="73" column="50" selection-start-line="73" selection-start-column="50" selection-end-line="73" selection-end-column="50" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -647,22 +685,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/js/components/App.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="14" column="0" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/js/components/PracticeFields.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="51" column="47" selection-start-line="51" selection-start-column="47" selection-end-line="51" selection-end-column="47" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/dist/styles/main.css">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -753,16 +775,17 @@
     <entry file="file://$PROJECT_DIR$/src/js/components/Home_appointments_table.jsx">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="145" column="20" selection-start-line="145" selection-start-column="20" selection-end-line="145" selection-end-column="20" />
+          <caret line="194" column="20" selection-start-line="194" selection-start-column="20" selection-end-line="194" selection-end-column="20" />
           <folding>
-            <marker date="1451334283000" expanded="true" signature="3304:5350" placeholder="&lt;xml/&gt;" />
-            <marker date="1451334283000" expanded="true" signature="3636:4609" placeholder="&lt;xml/&gt;" />
-            <marker date="1451334283000" expanded="true" signature="4619:5337" placeholder="&lt;xml/&gt;" />
-            <marker date="1451334283000" expanded="true" signature="4685:5322" placeholder="&lt;xml/&gt;" />
-            <marker date="1451334283000" expanded="true" signature="4728:5305" placeholder="&lt;xml/&gt;" />
-            <marker date="1451334283000" expanded="true" signature="4774:4985" placeholder="&lt;xml/&gt;" />
-            <marker date="1451334283000" expanded="true" signature="5000:5118" placeholder="&lt;xml/&gt;" />
-            <marker date="1451334283000" expanded="true" signature="5133:5286" placeholder="&lt;xml/&gt;" />
+            <marker date="1451922075000" expanded="true" signature="5262:5268" placeholder="{...}" />
+            <marker date="1451922075000" expanded="true" signature="5288:7334" placeholder="&lt;xml/&gt;" />
+            <marker date="1451922075000" expanded="true" signature="5620:6593" placeholder="&lt;xml/&gt;" />
+            <marker date="1451922075000" expanded="true" signature="6603:7321" placeholder="&lt;xml/&gt;" />
+            <marker date="1451922075000" expanded="true" signature="6669:7306" placeholder="&lt;xml/&gt;" />
+            <marker date="1451922075000" expanded="true" signature="6712:7289" placeholder="&lt;xml/&gt;" />
+            <marker date="1451922075000" expanded="true" signature="6758:6969" placeholder="&lt;xml/&gt;" />
+            <marker date="1451922075000" expanded="true" signature="6984:7102" placeholder="&lt;xml/&gt;" />
+            <marker date="1451922075000" expanded="true" signature="7117:7270" placeholder="&lt;xml/&gt;" />
           </folding>
         </state>
       </provider>
@@ -770,16 +793,10 @@
     <entry file="file://$PROJECT_DIR$/src/js/components/Edit_appointment.jsx">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="7" column="53" selection-start-line="7" selection-start-column="44" selection-end-line="7" selection-end-column="53" />
+          <caret line="4" column="37" selection-start-line="4" selection-start-column="37" selection-end-line="4" selection-end-column="37" />
           <folding>
-            <marker date="1451334283000" expanded="true" signature="1179:3640" placeholder="&lt;xml/&gt;" />
-            <marker date="1451334283000" expanded="true" signature="1430:1870" placeholder="&lt;xml/&gt;" />
-            <marker date="1451334283000" expanded="true" signature="1878:2210" placeholder="&lt;xml/&gt;" />
-            <marker date="1451334283000" expanded="true" signature="2218:2590" placeholder="&lt;xml/&gt;" />
-            <marker date="1451334283000" expanded="true" signature="2731:2884" placeholder="&lt;xml/&gt;" />
-            <marker date="1451334283000" expanded="true" signature="2892:3145" placeholder="&lt;xml/&gt;" />
-            <marker date="1451334283000" expanded="true" signature="3153:3503" placeholder="&lt;xml/&gt;" />
-            <marker date="1451334283000" expanded="true" signature="3511:3628" placeholder="&lt;xml/&gt;" />
+            <marker date="1451922075000" expanded="true" signature="6508:6518" placeholder="&lt;xml/&gt;" />
+            <marker date="1451922075000" expanded="true" signature="6508:6530" placeholder="&lt;xml/&gt;" />
           </folding>
         </state>
       </provider>
@@ -787,8 +804,12 @@
     <entry file="file://$PROJECT_DIR$/src/js/stores/AppointmentStore.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="17" column="30" selection-start-line="17" selection-start-column="30" selection-end-line="17" selection-end-column="30" />
-          <folding />
+          <caret line="21" column="30" selection-start-line="21" selection-start-column="30" selection-end-line="21" selection-end-column="30" />
+          <folding>
+            <marker date="1451922075000" expanded="true" signature="210:1260" placeholder="{...}" />
+            <marker date="1451922075000" expanded="true" signature="432:1042" placeholder="{...}" />
+            <marker date="1451922075000" expanded="true" signature="458:1037" placeholder="{...}" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -806,42 +827,75 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/dist/styles/jv.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="38" column="24" selection-start-line="38" selection-start-column="24" selection-end-line="38" selection-end-column="24" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/styles/jv.scss">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="228" column="0" selection-start-line="228" selection-start-column="0" selection-end-line="228" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/index.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.16853933">
           <caret line="9" column="0" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/styles/bootstrap_3.3.2.css">
+    <entry file="file://$PROJECT_DIR$/src/js/components/App.jsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="2556" column="0" selection-start-line="2556" selection-start-column="0" selection-end-line="2556" selection-end-column="0" />
+        <state vertical-scroll-proportion="-0.58181816">
+          <caret line="14" column="0" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/js/components/AccountFields.jsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.29090908">
-          <caret line="56" column="0" selection-start-line="56" selection-start-column="0" selection-end-line="56" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="45" column="17" selection-start-line="45" selection-start-column="0" selection-end-line="46" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/js/components/BillingFields.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="153" column="16" selection-start-line="153" selection-start-column="16" selection-end-line="153" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dist/styles/jv.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="57" column="0" selection-start-line="57" selection-start-column="0" selection-end-line="57" selection-end-column="0" />
+          <folding>
+            <marker date="1451942878000" expanded="true" signature="1047:1103" placeholder="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/styles/bootstrap_3.3.2.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-11.518518">
+          <caret line="5022" column="22" selection-start-line="5021" selection-start-column="2" selection-end-line="5022" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/js/components/PracticeFields.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="148" column="22" selection-start-line="142" selection-start-column="18" selection-end-line="148" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/js/components/Signup.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="114" column="38" selection-start-line="114" selection-start-column="38" selection-end-line="114" selection-end-column="38" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/styles/jv.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.48064086">
+          <caret line="119" column="8" selection-start-line="119" selection-start-column="0" selection-end-line="120" selection-end-column="0" />
           <folding />
         </state>
       </provider>

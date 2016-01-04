@@ -42,6 +42,8 @@ export default class AccountFields extends React.Component {
 
    render() {
     return (
+
+      <div className="center">
       <Form
 
         onload={this._loadForm.bind(this)}
@@ -49,6 +51,7 @@ export default class AccountFields extends React.Component {
         // submit attempts
         onValidSubmit={this._handleValidSubmit.bind(this)}
         onInvalidSubmit={this._handleInvalidSubmit.bind(this)}>
+
 
         <ValidatedInput
           type='text'
@@ -61,6 +64,7 @@ export default class AccountFields extends React.Component {
           isLength: 'Name must be at least 3 characters long'
         }}
           />
+
 
         <ValidatedInput
           type='text'
@@ -102,14 +106,16 @@ export default class AccountFields extends React.Component {
           errorHelp='Passwords do not match'
           />
 
+        <div className="center -button">
         <ButtonInput
           type='submit'
           bsSize='large'
           bsStyle='primary'
           value='Continue'
           />
-
+        </div>
       </Form>
+        </div>
     )
   }
 }

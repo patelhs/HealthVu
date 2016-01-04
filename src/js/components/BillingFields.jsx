@@ -33,6 +33,9 @@ export default class BillingFields extends React.Component {
 
    render() {
     return (
+
+      <div className="container center">
+
       <Form
 
         onload={this._loadForm.bind(this)}
@@ -41,6 +44,8 @@ export default class BillingFields extends React.Component {
         onValidSubmit={this._handleValidSubmit.bind(this)}
         onInvalidSubmit={this._handleInvalidSubmit.bind(this)}>
 
+        <div className="row">
+          <div className="col-md-5">
         <ValidatedInput
           type='text'
           name='billingContact'
@@ -76,6 +81,10 @@ export default class BillingFields extends React.Component {
           isLength: 'Phone number is not valid'
         }}
           />
+      </div>
+          <div className="col-xs-1">
+            </div>
+          <div className="col-md-5">
 
         <ValidatedInput
           type='number'
@@ -110,17 +119,24 @@ export default class BillingFields extends React.Component {
           errorHelp='date is required'
           />
 
-        <ValidatedInput
-          type='checkbox'
-          name='agree'
-          label='I agree to the terms and conditions'
-          // Validation rules is easily extendable to fit
-          // your needs. There are only two custom rules,
-          // 'isChecked' and 'required', others are stock
-          // validator.js methods
-          validate='isChecked'
-          />
 
+            </div>
+
+        </div>
+
+        <div className="row">
+        <div className="center">
+          <div className="center -button">
+          <ValidatedInput
+            type='checkbox'
+            name='agree'
+            label='I agree to the terms and conditions'
+            // Validation rules is easily extendable to fit
+            // your needs. There are only two custom rules,
+            // 'isChecked' and 'required', others are stock
+            // validator.js methods
+            validate='isChecked'
+            />
 
         <ButtonInput
           type='submit'
@@ -129,7 +145,21 @@ export default class BillingFields extends React.Component {
           value='Register'
           />
 
+            <ButtonInput
+              type='button'
+              bsSize='large'
+              bsStyle='secondary'
+              value='Back'
+              onClick={this.props.previousStep.bind(this)}
+              />
+            </div>
+          </div>
+          </div>
+
+
       </Form>
+
+        </div>
     )
   }
 }
