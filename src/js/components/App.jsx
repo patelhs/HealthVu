@@ -79,7 +79,7 @@ export default class App extends React.Component {
   }
 
   logout(e) {
-    alert("clicked");
+    //alert("clicked");
     //If there is internet connection, do following
 
     var auth2 = gapi.auth2.getAuthInstance();
@@ -91,7 +91,7 @@ export default class App extends React.Component {
 
     //e.preventDefault();
     LoginActionCreators.logoutUser();
-    alert("done");
+    //alert("done");
   }
 
   get headerItems() {

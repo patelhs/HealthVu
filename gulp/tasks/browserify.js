@@ -31,4 +31,5 @@ function bundle(){
   .pipe(gulp.dest(config.dest))
   // .pipe(connect.reload());
   .pipe(livereload());
+
 }

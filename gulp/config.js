@@ -34,6 +34,10 @@ module.exports = {
     src: 'src/index.html',
     dest: dest
   },
+  manualjs: {
+    src: 'src/manualjs/*.js',
+    dest: dest + '/manualjs'
+  },
   watch: {
     src: 'src/**/*.*',
     tasks: ['build']

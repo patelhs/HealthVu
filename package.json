@@ -25,11 +25,16 @@
   "dependencies": {
     "bluebird": "~2.9.27",
     "bootstrap": "^3.3.6",
+    "brfs": "^1.4.2",
+    "excel": "^0.1.4",
     "fbjs": "^0.3.2",
     "flux": "^2.0.3",
     "forms": "^1.1.4",
+    "fs": "0.0.2",
+    "fs2": "^0.2.3",
     "joi": "^7.0.1",
     "joi-validation-strategy": "^0.3.2",
+    "jszip": "^2.5.0",
     "jwt-decode": "^1.1.0",
     "keymirror": "^0.1.1",
     "object-assign": "^2.0.0",
@@ -38,10 +43,14 @@
     "react-bootstrap-table": "^1.2.15",
     "react-bootstrap-validation": "^0.1.10",
     "react-data-components": "^0.6.0",
+    "react-datetime": "^2.0.2",
     "react-mixin": "^1.1.0",
     "react-router": "^0.13.3",
     "react-validation-mixin": "^5.3.2",
-    "request": "^2.57.0"
+    "request": "^2.57.0",
+    "xlsjs": "^0.7.5",
+    "xlsx": "^0.8.0",
+    "xlsx-browserify-shim": "0.0.5"
   },
   "devDependencies": {
     "babelify": "^6.1.2",

@@ -4,9 +4,17 @@ import {BootstrapTable, TableHeaderColumn, TableDataSet} from 'react-bootstrap-t
 import AppointmentStore from '../stores/AppointmentStore';
 import ReactMixin from 'react-mixin';
 import dateFormat from 'dateformat';
+import uuid from 'node-uuid';
+//import {XLSX, jszip} from 'xlsx-browserify-shim';
+//import {xlsx} from 'xlsjs';
+
+//import {xlsx, jszip} from 'xlsx';
+
+//import fs from 'browserify-fs';
+
+
 
 import AppointmentActionCreator from '../actions/AppointmentActionCreators';
-
 import EditAppointent from './Edit_appointment';
 
 export default class BasicTable extends React.Component{
@@ -23,9 +31,9 @@ export default class BasicTable extends React.Component{
       page: 1,
       sizePerPageList: [5,10,15,20,25], //you can change the dropdown list for size per page
       sizePerPage: 10,  //which size per page you want to locate as default
-      paginationSize: 100,
-      afterInsertRow: this.onAfterInsertRow.bind(this)
-      //totalPages: 100
+      paginationSize: 10,
+      afterInsertRow: this.onAfterInsertRow.bind(this),
+      totalPages: 100
     };
 
     this.selectRowProp = {
@@ -41,7 +49,7 @@ export default class BasicTable extends React.Component{
     return {
       data: [],
       pageNumber: 1,
-      pageSize: 15
+      pageSize: 10
     };
   }
 
@@ -49,7 +57,7 @@ export default class BasicTable extends React.Component{
   componentDidMount() {
     console.log("in componentDidMount()")
     //AppointmentActionCreator.getAppointments(this.state.pageNumber, this.state.pageSize);
-    AppointmentActionCreator.getHealthVuAppointments(1, 1, 25);
+    AppointmentActionCreator.getHealthVuAppointments(1, 1, 10);
     //this.dataSet = new TableDataSet(this.state.data);
     this.changeListener = this._onChange.bind(this);
     AppointmentStore.addChangeListener(this.changeListener);
@@ -74,7 +82,7 @@ export default class BasicTable extends React.Component{
     //AppointmentActionCreator.getAppointments(this.state.pageNumber, this.state.pageSize);
     //this.dataSet.setData(this.state.data);
 
-    AppointmentActionCreator.getHealthVuAppointments(1, 1, 25);
+    AppointmentActionCreator.getHealthVuAppointments(1, 1, 10);
     this.dataSet.setData(this.state.data);
 
   }
@@ -107,6 +115,10 @@ export default class BasicTable extends React.Component{
     $(".modal-body #patientFirst").val(row.patientFirst);
     $(".modal-body #patientLast").val(row.patientLast);
     $(".modal-body #appointmentId").val(row.appointmentId);
+
+    $(".modal-body #notificationResponseStatus").val(row.notificationResponseStatus);
+    $(".modal-body #notificationType").val(row.notificationType);
+
     var date = new Date(row.appointmentDateTime);
     console.log(date);
     date = date.toLocaleString();
@@ -126,8 +138,42 @@ export default class BasicTable extends React.Component{
     $('#myModal').modal('show');
   }
 
-  render(){
+  importAppointments(e){
+    //console.log("in import");
+    console.log(e);
+    console.log(e.target.files[0].webkitRelativePath);
 
+    var reader = new FileReader();
+
+    // inject an image with the src url
+    reader.onload = function(event) {
+      var data = event.target.result
+      //console.log('data' + data);
+
+      var xlsx = XLSX;
+      var workbook = xlsx.read(data, {type: 'binary'});
+
+      var result = {};
+      workbook.SheetNames.forEach(function(sheetName) {
+        var roa = xlsx.utils.sheet_to_row_object_array(workbook.Sheets[sheetName]);
+        if(roa.length > 0){
+          result[sheetName] = roa;
+        }
+      });
+      console.log(result);
+      $.each(result.Sheet1, function(i, item){
+        item.appointmentId = uuid.v4();
+        //console.log(item);
+        AppointmentActionCreator.saveAppointment(item);
+      });
+      //AppointmentActionCreator.getHealthVuAppointments(1, 1, 25);
+    }
+
+    // when the file is read it triggers the onload event above.
+    reader.readAsBinaryString(e.target.files[0]);
+  }
+
+  render(){
     $(document).on('click', '.open-AddBookDialog', function(){
       $(".modal-body #patientEmail").val('');
       $(".modal-body #providerPrefix").val('');
@@ -142,6 +188,7 @@ export default class BasicTable extends React.Component{
       $(".modal-body #patientLast").val('');
       $(".modal-body #appointmentId").val('');
       $(".modal-body #appointmentDateTime").val('');
+      $(".modal-body #appointmentId").val(uuid.v4());
 
     });
     //var dateFormat = require('dateformat');
@@ -153,52 +200,75 @@ export default class BasicTable extends React.Component{
       return dateFormat(date, "dddd, mmmm dS, yyyy, h:MM:ss TT");
       //return date;
     }
+
     function statusFormatter(cell, row){
-      if (row.isActive){
-        return '<button type="button" class="btn btn-info"><i class="glyphicon"></i><span>Active</span></button>';
-      }
+      var text = '<button type="button" class="btn btn-info"><i class="glyphicon"></i><span></span></button>';
+
+      text = (row.notificationResponseStatus == "NEW" && row.notificationType == "NEW") ? '<button type="button" class="btn btn-info" style="background-color: #0e3380;height: 30px;width: 100px;"><i class="glyphicon"></i><span>NEW</span></button>' : text;
+      text = (row.notificationResponseStatus == "DELIVERED" && row.notificationType == "CONFIRMATION") ? '<button type="button" class="btn btn-info" style="background-color: #0c6966;height: 30px;width: 100px;"><i class="glyphicon"></i><span>DELIVERED</span></button>' : text;
+      text = (row.notificationResponseStatus == "CONFIRMED" && row.notificationType == "CONFIRMATION") ? '<button type="button" class="btn btn-info" style="background-color: #0c6966;height: 30px;width: 100px;"><i class="glyphicon"></i><span>PATIENT CONFIRMED</span></button>' : text;
+      text = (row.notificationResponseStatus == "CONFIRMED" && row.notificationType == "REMINDER") ? '<button type="button" class="btn btn-info" style="background-color: #117c20;height: 30px;width: 100px;"><i class="glyphicon"></i><span>PATIENT CONFIRMED</span></button>' : text;
+      text = (row.notificationResponseStatus == "CANCELLED" && row.notificationType == "CONFIRMATION") ? '<button type="button" class="btn btn-info" style="background-color: #ff0000;height: 30px;width: 100px;"><i class="glyphicon"></i><span>CANCELLED</span></button>' : text;
+      return text;
     }
-    function onAdd(){
-      console.log("onadd");
-    }
+
     return (
       <div>
-        <button type="button" className="open-AddBookDialog btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Add Appointment</button>
       {/*
         <button onClick={this.queryData.bind(this)}>Get More Data</button>
         <button onClick={this.addAppointment.bind(this)}> Add </button>
        */}
 
+
         <BootstrapTable data={this.state.data}
           selectRow={this.selectRowProp}
           insertRow={false}
-          pagination={false}
+          pagination={true}
           search={true}
-          options={this.options}
-          height="240">
+        >
 
           <TableHeaderColumn dataField="patientFirst" dataSort={true} dataFormat={nameFormatter}>Patient Name</TableHeaderColumn>
-          <TableHeaderColumn type="date" dataField="appointmentDateTime" dataFormat={dateFormatter} dataSort={true}>Appointment Date</TableHeaderColumn>
+          <TableHeaderColumn type="date" dataField="appointmentDateTime" dataFormat={dateFormatter} dataSort={true}>Date & Time</TableHeaderColumn>
           <TableHeaderColumn type="text" dataField="appointmentLocationName" dataSort={true}>Appointment Location</TableHeaderColumn>
+          <TableHeaderColumn type="text" dataField="lastModifiedDate" dataSort={true}>Last Modified</TableHeaderColumn>
           <TableHeaderColumn dataFormat={statusFormatter}>Status</TableHeaderColumn>
 
           <TableHeaderColumn type="text" dataField="patientLast" hidden={true}>Last Name</TableHeaderColumn>
           <TableHeaderColumn dataField="appointmentId" isKey={true} hidden={true}>Appointment ID</TableHeaderColumn>
         </BootstrapTable>
+        <br />
 
+        <div style={{display:"table", margin:"0 auto"}}>
+          <div style={{float:"left", padding:"20px"}}>
+            <button type="button" className="open-AddBookDialog btn btn-info btn-lg" style={{height: "69px"}} data-toggle="modal" data-target="#myModal">Add Appointment</button>
+          </div>
+          <div style={{float:"left", padding:"20px"}}>
+            <div className="fileinput fileinput-new " data-provides="fileinput">
+              <span className="btn btn-info btn-lg btn-file" style={{"padding-top":"20px"}}>
+                <span>Import from Excel</span>
+                <Input type="file" onChange={this.importAppointments.bind(this)} />
+              </span>
+              <span className="fileinput-filename"></span>
+              <span className="fileinput-new"></span>
+            </div>
+          </div>
+        </div>
         <div id="myModal" className="modal fade" role="dialog">
           <div className="modal-dialog">
             <div className="modal-content">
               <div class="modal-header">
                 <button type="button" className="close" data-dismiss="modal">&times;</button>
-                <h4 className="modal-title">Add/Edit Appointment</h4>
+                <h2 className="modal-title">Add/Edit Appointment</h2>
               </div>
+              <br />
               <div className="modal-body">
                 <EditAppointent appointment={this.state.selected} />
               </div>
+            {/*
               <div className="modal-footer">
                 <button type="button" className="btn btn-default" data-dismiss="modal">Close</button>
               </div>
+            */}
             </div>
           </div>
         </div>

@@ -32,7 +32,7 @@ class AppointmentStore extends BaseStore {
         break;
       case ActionTypes.SAVE_APPOINTMENT_DATA_SUCCESS:
         this._error = null;
-        this.emitChange();
+        //this.emitChange();
         break;
       default:
         break;
