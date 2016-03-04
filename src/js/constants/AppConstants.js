@@ -7,5 +7,7 @@ export default {
 
   APPOINTMENTS_API_URL: BASE_URL + 'api/appointments',
   GET_APPOINTMENTS_URL: HEALTHVU_URL + 'view-appointments',
-  SAVE_APPOINTMENT_URL: HEALTHVU_URL + 'add-appointment'
+  SAVE_APPOINTMENT_URL: HEALTHVU_URL + 'add-appointment',
+
+  FIND_PRACTICE_USER_URL: HEALTHVU_URL + 'find-practice-user'
 }

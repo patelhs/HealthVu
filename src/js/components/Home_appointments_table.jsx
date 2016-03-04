@@ -2,23 +2,14 @@ import React from 'react/addons';
 import {Input, DatePicker} from 'react-bootstrap';
 import {BootstrapTable, TableHeaderColumn, TableDataSet} from 'react-bootstrap-table';
 import AppointmentStore from '../stores/AppointmentStore';
+import LoginStore from '../stores/LoginStore';
 import ReactMixin from 'react-mixin';
 import dateFormat from 'dateformat';
 import uuid from 'node-uuid';
-//import {XLSX, jszip} from 'xlsx-browserify-shim';
-//import {xlsx} from 'xlsjs';
-
-//import {xlsx, jszip} from 'xlsx';
-
-//import fs from 'browserify-fs';
-
-
-
 import AppointmentActionCreator from '../actions/AppointmentActionCreators';
 import EditAppointent from './Edit_appointment';
 
 export default class BasicTable extends React.Component{
-
   constructor(props) {
     console.log("appointments table constructor");
     super(props);
@@ -28,7 +19,7 @@ export default class BasicTable extends React.Component{
 
     this.options = {
       onPageChange: this.onPageChange.bind(this),
-      page: 1,
+      page: 0,
       sizePerPageList: [5,10,15,20,25], //you can change the dropdown list for size per page
       sizePerPage: 10,  //which size per page you want to locate as default
       paginationSize: 10,
@@ -48,16 +39,19 @@ export default class BasicTable extends React.Component{
   _getAppointments() {
     return {
       data: [],
-      pageNumber: 1,
-      pageSize: 10
+      pageNumber: AppointmentStore.resultPage,
+      pageSize: AppointmentStore.maxResults,
+      practiceId: LoginStore.loggedInUser.practiceId
     };
   }
 
 
-  componentDidMount() {
+  componentDidMount(){
     console.log("in componentDidMount()")
     //AppointmentActionCreator.getAppointments(this.state.pageNumber, this.state.pageSize);
-    AppointmentActionCreator.getHealthVuAppointments(1, 1, 10);
+    console.log(LoginStore.loggedInUser.practiceId);
+    var practiceId = localStorage.getItem("practiceId");
+    AppointmentActionCreator.getHealthVuAppointments(LoginStore.practiceId, AppointmentStore.resultPage, AppointmentStore.maxResults);
     //this.dataSet = new TableDataSet(this.state.data);
     this.changeListener = this._onChange.bind(this);
     AppointmentStore.addChangeListener(this.changeListener);
@@ -202,7 +196,7 @@ export default class BasicTable extends React.Component{
     }
 
     function statusFormatter(cell, row){
-      var text = '<button type="button" class="btn btn-info"><i class="glyphicon"></i><span></span></button>';
+      var text = '<button type="button" className="btn btn-info"><i className="glyphicon"></i><span></span></button>';
 
       text = (row.notificationResponseStatus == "NEW" && row.notificationType == "NEW") ? '<button type="button" class="btn btn-info" style="background-color: #0e3380;height: 30px;width: 100px;"><i class="glyphicon"></i><span>NEW</span></button>' : text;
       text = (row.notificationResponseStatus == "DELIVERED" && row.notificationType == "CONFIRMATION") ? '<button type="button" class="btn btn-info" style="background-color: #0c6966;height: 30px;width: 100px;"><i class="glyphicon"></i><span>DELIVERED</span></button>' : text;
@@ -225,13 +219,14 @@ export default class BasicTable extends React.Component{
           insertRow={false}
           pagination={true}
           search={true}
+          options={this.options}
         >
 
           <TableHeaderColumn dataField="patientFirst" dataSort={true} dataFormat={nameFormatter}>Patient Name</TableHeaderColumn>
           <TableHeaderColumn type="date" dataField="appointmentDateTime" dataFormat={dateFormatter} dataSort={true}>Date & Time</TableHeaderColumn>
           <TableHeaderColumn type="text" dataField="appointmentLocationName" dataSort={true}>Appointment Location</TableHeaderColumn>
           <TableHeaderColumn type="text" dataField="lastModifiedDate" dataSort={true}>Last Modified</TableHeaderColumn>
-          <TableHeaderColumn dataFormat={statusFormatter}>Status</TableHeaderColumn>
+          <TableHeaderColumn dataSort={true} dataField="notificationResponseStatus" dataFormat={statusFormatter}>Status</TableHeaderColumn>
 
           <TableHeaderColumn type="text" dataField="patientLast" hidden={true}>Last Name</TableHeaderColumn>
           <TableHeaderColumn dataField="appointmentId" isKey={true} hidden={true}>Appointment ID</TableHeaderColumn>
@@ -276,5 +271,6 @@ export default class BasicTable extends React.Component{
     );
   }
 };
+
 
 ReactMixin(BasicTable.prototype, React.addons.LinkedStateMixin);

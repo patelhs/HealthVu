@@ -9,19 +9,14 @@ import { Radio, RadioGroup } from 'react-bootstrap-validation';
 
 import AppointmentActionCreator from '../actions/AppointmentActionCreators';
 
-export default
-class EditAppointent extends React.Component {
+export default class EditAppointent extends React.Component {
   constructor(props) {
     super(props);
     console.log("ON Edit: " + props.appointment);
-
     this.state = {
       disabled: true,
       style: null,
       value: "",
-      username: "",
-      email: "",
-      password: "",
       loading: false,
       errors: {}
     }
@@ -33,9 +28,12 @@ class EditAppointent extends React.Component {
     console.log(values);
     console.log("before save");
     AppointmentActionCreator.saveAppointment(values);
+    console.log("Result " + AppointmentStore.error);
+    if (AppointmentStore.error == null){
+      $('#myModal').modal('hide');
+      AppointmentActionCreator.getHealthVuAppointments(AppointmentStore.practiceId, AppointmentStore.resultPage, AppointmentStore.maxResults);
+    }
     console.log("after save");
-    $('#myModal').modal('hide');
-    AppointmentActionCreator.getHealthVuAppointments(1, 1, 25);
   }
 
   _handleInvalidSubmit(errors, values) {
@@ -103,6 +101,7 @@ class EditAppointent extends React.Component {
                   type='text'
                   label='Provider Middle Name'
                   name='providerMiddle'
+                  validate='required'
                   id='providerMiddle'
                 />
               </div>

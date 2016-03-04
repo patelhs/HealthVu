@@ -86,9 +86,9 @@ class AppointmentService {
     //console.log("before sending request: " + id_token);
 
     var formData = {
-      practiceId: 1,
-      resultPage: 1,
-      maxResults: 25
+      practiceId: practiceId,
+      resultPage: resultPage,
+      maxResults: maxResults
     };
     var data = querystring.stringify(formData);
     var contentLength = data.length;

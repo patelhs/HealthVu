@@ -43,6 +43,7 @@
     "react-bootstrap-table": "^1.2.15",
     "react-bootstrap-validation": "^0.1.10",
     "react-data-components": "^0.6.0",
+    "react-datagrid": "^2.0.2",
     "react-datetime": "^2.0.2",
     "react-mixin": "^1.1.0",
     "react-router": "^0.13.3",

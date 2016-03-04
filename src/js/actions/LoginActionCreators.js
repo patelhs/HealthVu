@@ -27,6 +27,22 @@ export default {
 
   googleLogin: (googleUser) => {
     console.log("actionc: " + googleUser);
-    dispatch(ActionTypes.GOOGLE_LOGIN, {googleUser: googleUser});
+    //dispatch(ActionTypes.GOOGLE_LOGIN, {googleUser: googleUser});
+
+    let promise = AuthService.signup(googleUser);
+    dispatchAsync(promise, {
+        request: ActionTypes.REQUEST_SIGNIN_USER,
+        success: ActionTypes.REQUEST_SIGNIN_USER_SUCCESS,
+        failure: ActionTypes.REQUEST_SIGNIN_USER_ERROR
+      }, {googleUser});
+  },
+
+  signIn: (id_token) => {
+    let promise = AuthService.signup(id_token);
+    dispatchAsync(promise, {
+      request: ActionTypes.REQUEST_SIGNIN_USER,
+      success: ActionTypes.REQUEST_SIGNIN_USER_SUCCESS,
+      failure: ActionTypes.REQUEST_SIGNIN_USER_ERROR
+    }, {id_token});
   }
 }

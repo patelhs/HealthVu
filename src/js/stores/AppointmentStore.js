@@ -11,6 +11,9 @@ class AppointmentStore extends BaseStore {
     this.subscribe(() => this._registerToActions.bind(this));
     this._appointments = null;
     this._error = null;
+    this._practiceId = 1;
+    this._resultPage = 1;
+    this._maxResults = 25;
 
     console.log("store kicked in");
   }
@@ -19,10 +22,14 @@ class AppointmentStore extends BaseStore {
     switch(action.type) {
 
       case ActionTypes.REQUEST_APPOINTMENT_DATA_SUCCESS:
+        console.log(action);
         console.log(action.body.items);
         this._appointments = action.body.items;
 //        localStorage.setItem("appointments", this._appointments);
         this._error = null;
+        this._maxResults = action.maxResults;
+        this._resultPage = action.resultPage;
+        this._practiceId = action.practiceId;
         this.emitChange();
         break;
 
@@ -33,6 +40,11 @@ class AppointmentStore extends BaseStore {
       case ActionTypes.SAVE_APPOINTMENT_DATA_SUCCESS:
         this._error = null;
         //this.emitChange();
+        break;
+      case ActionTypes.SAVE_APPOINTMENT_DATA_ERROR:
+        this._error = action.error;
+        console.log("Error during saving: " + this._error);
+        this.emitChange();
         break;
       default:
         break;
@@ -50,6 +62,15 @@ class AppointmentStore extends BaseStore {
 
   get error() {
     return this._error;
+  }
+  get practiceId(){
+    return this._practiceId;
+  }
+  get maxResults(){
+    return this._maxResults;
+  }
+  get resultPage(){
+    return this._resultPage;
   }
 }
 

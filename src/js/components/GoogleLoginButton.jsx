@@ -48,7 +48,9 @@ export default class GoogleLoginButton extends React.Component{
     //localStorage.setItem("jv_jwt", googleUser.po.id_token);
     //LoginStore.user
 
+
     LoginActionCreators.googleLogin(googleUser);
+    //LoginActionCreators.signIn(googleUser.getAuthResponse().id_token);
     //this._onLoginChange();
     //router.transitionTo("/");
 
