@@ -11,7 +11,7 @@ class LoginStore extends BaseStore {
     this._user = null;
     this._error = null;
     this._jwt = null;
-    this._loggedInUser = null;
+    this._loggedOnUser = null;
     this._practiceId = null;
 
     //attempt auto-login
@@ -42,15 +42,15 @@ class LoginStore extends BaseStore {
         this._error = null;
         this._jwt = null;
         localStorage.setItem("jv_jwt", "");
+        localStorage.setItem("loggedOnUser", "");
         this.emitChange();
         break;
 
       case ActionTypes.REQUEST_SIGNIN_USER:
         break;
       case ActionTypes.REQUEST_SIGNIN_USER_SUCCESS:
-        console.log("sign in success: " + action.body.firstName);
-        this._loggedInUser = action.body;
-        localStorage.setItem("loggedInUser", action.body);
+        this._loggedOnUser = JSON.stringify(action.body);
+        localStorage.setItem("loggedOnUser", this._loggedOnUser);
         localStorage.setItem("practiceId", action.body.practiceId);
         this._practiceId = action.body.practiceId;
 
@@ -87,7 +87,7 @@ class LoginStore extends BaseStore {
 
   _autoLogin() {
     let jwt = localStorage.getItem("jv_jwt");
-    let loggedInUser = localStorage.getItem("loggedInUser");
+    let loggedOnUser = localStorage.getItem("loggedOnUser");
     let token_expires_at = localStorage.getItem("token_expires_at");
     let practiceId = localStorage.getItem("practiceId");
     let d = Date.parse(Date());
@@ -95,7 +95,7 @@ class LoginStore extends BaseStore {
       this._jwt = jwt;
       //console.log(jwt);
       this._user = jwt_decode(this._jwt);
-      this._loggedInUser = loggedInUser;
+      this._loggedOnUser = loggedOnUser;
       this._practiceId = practiceId;
       console.log("&*&*&* autologin success")
     }
@@ -113,9 +113,9 @@ class LoginStore extends BaseStore {
     return this._jwt;
   }
 
-  get loggedInUser(){
-    console.log("getting logged in user: " + this._loggedInUser);
-    return this._loggedInUser;
+  get loggedOnUser(){
+    console.log("getting logged in user: " + this._loggedOnUser);
+    return JSON.parse(this._loggedOnUser);
   }
 
   get practiceId(){

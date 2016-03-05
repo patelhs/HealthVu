@@ -109,7 +109,7 @@ export default class App extends React.Component {
       return (
       <ul className="nav navbar-nav navbar-right">
         <li>
-          <Link to="/">Home</Link>
+          <Link to="/">{LoginStore.loggedOnUser ? LoginStore.loggedOnUser.emailAddress : ''}</Link>
         </li>
         <li>
           <a href="" onClick={this.logout.bind(this)}>Logout</a>

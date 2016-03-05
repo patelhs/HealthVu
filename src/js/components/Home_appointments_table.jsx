@@ -40,8 +40,7 @@ export default class BasicTable extends React.Component{
     return {
       data: [],
       pageNumber: AppointmentStore.resultPage,
-      pageSize: AppointmentStore.maxResults,
-      practiceId: LoginStore.loggedInUser.practiceId
+      pageSize: AppointmentStore.maxResults
     };
   }
 
@@ -49,9 +48,10 @@ export default class BasicTable extends React.Component{
   componentDidMount(){
     console.log("in componentDidMount()")
     //AppointmentActionCreator.getAppointments(this.state.pageNumber, this.state.pageSize);
-    console.log(LoginStore.loggedInUser.practiceId);
+    var loggedOnUser = LoginStore.loggedOnUser;
+    console.log("Hemal" + loggedOnUser.practiceId);
     var practiceId = localStorage.getItem("practiceId");
-    AppointmentActionCreator.getHealthVuAppointments(LoginStore.practiceId, AppointmentStore.resultPage, AppointmentStore.maxResults);
+    AppointmentActionCreator.getHealthVuAppointments(loggedOnUser.practiceId, AppointmentStore.resultPage, AppointmentStore.maxResults);
     //this.dataSet = new TableDataSet(this.state.data);
     this.changeListener = this._onChange.bind(this);
     AppointmentStore.addChangeListener(this.changeListener);
@@ -207,13 +207,13 @@ export default class BasicTable extends React.Component{
     }
 
     return (
-      <div>
+      <div className="container">
       {/*
         <button onClick={this.queryData.bind(this)}>Get More Data</button>
         <button onClick={this.addAppointment.bind(this)}> Add </button>
        */}
 
-
+        <br />
         <BootstrapTable data={this.state.data}
           selectRow={this.selectRowProp}
           insertRow={false}
