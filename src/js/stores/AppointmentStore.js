@@ -12,8 +12,8 @@ class AppointmentStore extends BaseStore {
     this._appointments = null;
     this._error = null;
     this._practiceId = 1;
-    this._resultPage = 1;
-    this._maxResults = 25;
+    this._resultPage = 0;
+    this._maxResults = 10;
 
     console.log("store kicked in");
   }
@@ -22,8 +22,8 @@ class AppointmentStore extends BaseStore {
     switch(action.type) {
 
       case ActionTypes.REQUEST_APPOINTMENT_DATA_SUCCESS:
-        console.log(action);
-        console.log(action.body.items);
+        //console.log("after success " + JSON.stringify(action));
+        //console.log(action.body.items);
         this._appointments = action.body.items;
 //        localStorage.setItem("appointments", this._appointments);
         this._error = null;

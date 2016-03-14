@@ -29,13 +29,24 @@ export default class EditAppointent extends React.Component {
     console.log("before save");
     AppointmentActionCreator.saveAppointment(values);
     console.log("Result " + AppointmentStore.error);
-    if (AppointmentStore.error == null){
+    if (AppointmentStore.error == null) {
+
+      BootstrapDialog.alert({
+        message: 'Data Saved Successfully',
+        title: 'Success',
+        type: BootstrapDialog.TYPE_SUCCESS
+      });
+
       $('#myModal').modal('hide');
       AppointmentActionCreator.getHealthVuAppointments(AppointmentStore.practiceId, AppointmentStore.resultPage, AppointmentStore.maxResults);
+    } else {
+      BootstrapDialog.alert({
+        message: 'There was an error saving data',
+        title: 'Failed',
+        type: BootstrapDialog.TYPE_WARNING
+      });
     }
-    console.log("after save");
   }
-
   _handleInvalidSubmit(errors, values) {
     // Errors is an array containing input names
     // that failed to validate
@@ -178,16 +189,14 @@ export default class EditAppointent extends React.Component {
                 />
               </div>
               <div className="form-group">
-                <ValidatedInput type="select" label="Current Status"
-                  name="notificationResponseStatus"
+                <ValidatedInput
+                  label='Current Status'
+                  type='text'
+                  name='notificationResponseStatus'
                   id='notificationResponseStatus'
-                  validate="required"
-                  errorHelp="Status Required">
-                  <option value="NEW">NEW</option>
-                  <option value="DELIVERED">DELIVERED</option>
-                  <option value="CONFIRMED">CONFIRMED</option>
-                  <option value="CANCELLED">CANCELLED</option>
-                </ValidatedInput>
+                  readOnly='true'
+                />
+
               </div>
             </div>
             <div className='col-md-3'>
@@ -255,15 +264,14 @@ export default class EditAppointent extends React.Component {
                 </ValidatedInput>
               </div>
               <div className="form-group">
-                <ValidatedInput type="select" label="Notification Type"
-                  name="notificationType"
+                <ValidatedInput
+                  label='Notification Type'
+                  type='text'
+                  name='notificationType'
                   id='notificationType'
-                  validate="required"
-                  errorHelp="Status Required">
-                  <option value="NEW">NEW</option>
-                  <option value="CONFIRMATION">CONFIRMATION</option>
-                  <option value="REMINDER">REMINDER</option>
-                </ValidatedInput>
+                  readOnly='true'
+                  />
+
               </div>
             </div>
           </div>

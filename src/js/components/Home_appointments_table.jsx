@@ -15,16 +15,16 @@ export default class BasicTable extends React.Component{
     super(props);
     //this.props.index = 1;
     this.state = this._getAppointments();
-    //this.dataSet = new TableDataSet(this.state.data);
+    this.dataSet = new TableDataSet(this.state.data);
 
     this.options = {
       onPageChange: this.onPageChange.bind(this),
+      onSizePerPageList: this.onSizePerPageList.bind(this),
       page: 0,
-      sizePerPageList: [5,10,15,20,25], //you can change the dropdown list for size per page
-      sizePerPage: 10,  //which size per page you want to locate as default
-      paginationSize: 10,
+      sizePerPageList: [10,15,20,30], //you can change the dropdown list for size per page
       afterInsertRow: this.onAfterInsertRow.bind(this),
-      totalPages: 100
+      sizePerPage: 10,
+      dataTotalSize: 57
     };
 
     this.selectRowProp = {
@@ -49,7 +49,6 @@ export default class BasicTable extends React.Component{
     console.log("in componentDidMount()")
     //AppointmentActionCreator.getAppointments(this.state.pageNumber, this.state.pageSize);
     var loggedOnUser = LoginStore.loggedOnUser;
-    console.log("Hemal" + loggedOnUser.practiceId);
     var practiceId = localStorage.getItem("practiceId");
     AppointmentActionCreator.getHealthVuAppointments(loggedOnUser.practiceId, AppointmentStore.resultPage, AppointmentStore.maxResults);
     //this.dataSet = new TableDataSet(this.state.data);
@@ -64,6 +63,10 @@ export default class BasicTable extends React.Component{
       data: AppointmentStore.appointments,
       selected: AppointmentStore.appointment
     });
+
+    console.log(this.refs.table);
+    //console.log("Hemal " + JSON.stringify(this.state.data));
+
   }
 
   componentWillUnmount() {
@@ -71,19 +74,31 @@ export default class BasicTable extends React.Component{
     AppointmentStore.removeChangeListener(this.changeListener);
   }
 
-  queryData(){
-    this.state.pageNumber+=1;
-    //AppointmentActionCreator.getAppointments(this.state.pageNumber, this.state.pageSize);
-    //this.dataSet.setData(this.state.data);
+  queryData(page, sizePerPage){
 
-    AppointmentActionCreator.getHealthVuAppointments(1, 1, 10);
-    this.dataSet.setData(this.state.data);
+    if (this.state.pageSize != sizePerPage){
+      page = 1;
+    }
+    this.state.pageNumber = page - 1;
+    this.state.pageSize = sizePerPage;
+    this.options.sizePerPage = sizePerPage;
+
+    AppointmentActionCreator.getHealthVuAppointments(1, this.state.pageNumber, this.state.pageSize);
+    //this.dataSet.setData(this.state.data);
+    //this._onChange();
 
   }
 
   onPageChange(page, sizePerPage) {
     //alert('page: ' + page + ', sizePerPage: ' + sizePerPage);
+    this.queryData(page, sizePerPage);
   }
+
+  onSizePerPageList(sizePerPage){
+    console.log("sizePerPage: " + sizePerPage);
+    alert(sizePerPage);
+  }
+
   onAfterInsertRow(row){
     var newRowStr = "";
 
@@ -168,6 +183,8 @@ export default class BasicTable extends React.Component{
   }
 
   render(){
+
+
     $(document).on('click', '.open-AddBookDialog', function(){
       $(".modal-body #patientEmail").val('');
       $(".modal-body #providerPrefix").val('');
@@ -189,46 +206,63 @@ export default class BasicTable extends React.Component{
     function nameFormatter(cell, row){
       return cell + " " + row.patientLast;
     }
-    function dateFormatter(cell, row){
-      var date = Date.parse(cell);
-      return dateFormat(date, "dddd, mmmm dS, yyyy, h:MM:ss TT");
-      //return date;
+
+    function providerFormatter(cell, row){
+      return cell + " " + + row.providerMiddle + row.providerLast;
+    }
+
+    function dateFormatter(value){
+      var date = Date.parse(value);
+      var t = dateFormat(date, "dddd, mmmm dS, yyyy, h:MM:ss TT");
+      return t;
     }
 
     function statusFormatter(cell, row){
-      var text = '<button type="button" className="btn btn-info"><i className="glyphicon"></i><span></span></button>';
+      var text = '<button type="button" className="btn btn-info"><i className="glyphicon"></i><span>'+row.notificationResponseStatus+'</span></button>';
 
-      text = (row.notificationResponseStatus == "NEW" && row.notificationType == "NEW") ? '<button type="button" class="btn btn-info" style="background-color: #0e3380;height: 30px;width: 100px;"><i class="glyphicon"></i><span>NEW</span></button>' : text;
-      text = (row.notificationResponseStatus == "DELIVERED" && row.notificationType == "CONFIRMATION") ? '<button type="button" class="btn btn-info" style="background-color: #0c6966;height: 30px;width: 100px;"><i class="glyphicon"></i><span>DELIVERED</span></button>' : text;
-      text = (row.notificationResponseStatus == "CONFIRMED" && row.notificationType == "CONFIRMATION") ? '<button type="button" class="btn btn-info" style="background-color: #0c6966;height: 30px;width: 100px;"><i class="glyphicon"></i><span>PATIENT CONFIRMED</span></button>' : text;
-      text = (row.notificationResponseStatus == "CONFIRMED" && row.notificationType == "REMINDER") ? '<button type="button" class="btn btn-info" style="background-color: #117c20;height: 30px;width: 100px;"><i class="glyphicon"></i><span>PATIENT CONFIRMED</span></button>' : text;
-      text = (row.notificationResponseStatus == "CANCELLED" && row.notificationType == "CONFIRMATION") ? '<button type="button" class="btn btn-info" style="background-color: #ff0000;height: 30px;width: 100px;"><i class="glyphicon"></i><span>CANCELLED</span></button>' : text;
+      text = (row.notificationResponseStatus == "NEW") ? '<button type="button" class="btn btn-info" style="background-color: #0e3380;height: 30px;width: 100px;"><i class="glyphicon"></i><span>NEW</span></button>' : text;
+      text = (row.notificationResponseStatus == "DELIVERED") ? '<button type="button" class="btn btn-info" style="background-color: #0c6966;height: 30px;width: 100px;"><i class="glyphicon"></i><span>DELIVERED</span></button>' : text;
+      text = (row.notificationResponseStatus == "CONFIRMED") ? '<button type="button" class="btn btn-info" style="background-color: #0c6966;height: 30px;width: 100px;"><i class="glyphicon"></i><span>PATIENT CONFIRMED</span></button>' : text;
+      text = (row.notificationResponseStatus == "CONFIRMED") ? '<button type="button" class="btn btn-info" style="background-color: #117c20;height: 30px;width: 100px;"><i class="glyphicon"></i><span>PATIENT CONFIRMED</span></button>' : text;
+      text = (row.notificationResponseStatus == "CANCELLED") ? '<button type="button" class="btn btn-info" style="background-color: #ff0000;height: 30px;width: 100px;"><i class="glyphicon"></i><span>CANCELLED</span></button>' : text;
+      return text;
+    }
+
+    function notificationFormatter(cell, row){
+      var text = '<button type="button" className="btn btn-info"><i className="glyphicon"></i><span>'+row.notificationType+'</span></button>';
+
+      text = (row.notificationType == "NEW") ? '<button type="button" class="btn btn-info" style="background-color: #0e3380;height: 30px;width: 110px;"><i class="glyphicon"></i><span>NEW</span></button>' : text;
+      text = (row.notificationType == "CONFIRMATION") ? '<button type="button" class="btn btn-info" style="background-color: #0c6966;height: 30px;width: 110px;"><i class="glyphicon"></i><span>CONFIRMATION</span></button>' : text;
+      text = (row.notificationType == "REMINDER") ? '<button type="button" class="btn btn-info" style="background-color: #117c20;height: 30px;width: 110px;"><i class="glyphicon"></i><span>REMINDER</span></button>' : text;
       return text;
     }
 
     return (
+
       <div className="container">
       {/*
         <button onClick={this.queryData.bind(this)}>Get More Data</button>
         <button onClick={this.addAppointment.bind(this)}> Add </button>
        */}
 
+
         <br />
+
         <BootstrapTable data={this.state.data}
           selectRow={this.selectRowProp}
           insertRow={false}
           pagination={true}
           search={true}
+          ref='table'
           options={this.options}
         >
-
-          <TableHeaderColumn dataField="patientFirst" dataSort={true} dataFormat={nameFormatter}>Patient Name</TableHeaderColumn>
           <TableHeaderColumn type="date" dataField="appointmentDateTime" dataFormat={dateFormatter} dataSort={true}>Date & Time</TableHeaderColumn>
+          <TableHeaderColumn dataField="patientFirst" dataSort={true} dataFormat={nameFormatter}>Patient Name</TableHeaderColumn>
+          <TableHeaderColumn type="text" dataField="providerFirst" dataSort={true} dataFormat={providerFormatter}>Provider</TableHeaderColumn>
           <TableHeaderColumn type="text" dataField="appointmentLocationName" dataSort={true}>Appointment Location</TableHeaderColumn>
-          <TableHeaderColumn type="text" dataField="lastModifiedDate" dataSort={true}>Last Modified</TableHeaderColumn>
           <TableHeaderColumn dataSort={true} dataField="notificationResponseStatus" dataFormat={statusFormatter}>Status</TableHeaderColumn>
+          <TableHeaderColumn dataSort={true} dataField="notificationType" dataFormat={notificationFormatter}>Notification Type</TableHeaderColumn>
 
-          <TableHeaderColumn type="text" dataField="patientLast" hidden={true}>Last Name</TableHeaderColumn>
           <TableHeaderColumn dataField="appointmentId" isKey={true} hidden={true}>Appointment ID</TableHeaderColumn>
         </BootstrapTable>
         <br />
