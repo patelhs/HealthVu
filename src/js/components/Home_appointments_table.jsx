@@ -7,16 +7,22 @@ import ReactMixin from 'react-mixin';
 import dateFormat from 'dateformat';
 import uuid from 'node-uuid';
 import AppointmentActionCreator from '../actions/AppointmentActionCreators';
+import LoginActionCreator from '../actions/LoginActionCreators';
 import EditAppointent from './Edit_appointment';
+import AppointmentService from '../services/AppointmentService';
 
 export default class BasicTable extends React.Component{
   constructor(props) {
     console.log("appointments table constructor");
     super(props);
-    //this.props.index = 1;
-    this.state = this._getAppointments();
-    this.dataSet = new TableDataSet(this.state.data);
+    this.loggedOnUser = LoginStore.loggedOnUser;
+    //Make request to get total
+    if (AppointmentStore.totalResultCount == 0){
+      //AppointmentService.getAppointmentsTotal(this.loggedOnUser.practiceId, -1, 10);
+    }
+    console.log(AppointmentStore.totalResultCount);
 
+    this.state = this._getAppointments();
     this.options = {
       onPageChange: this.onPageChange.bind(this),
       onSizePerPageList: this.onSizePerPageList.bind(this),
@@ -24,7 +30,7 @@ export default class BasicTable extends React.Component{
       sizePerPageList: [10,15,20,30], //you can change the dropdown list for size per page
       afterInsertRow: this.onAfterInsertRow.bind(this),
       sizePerPage: 10,
-      dataTotalSize: 57
+      dataTotalSize: 0//AppointmentStore.totalResultCount
     };
 
     this.selectRowProp = {
@@ -44,29 +50,38 @@ export default class BasicTable extends React.Component{
     };
   }
 
-
   componentDidMount(){
     console.log("in componentDidMount()")
-    //AppointmentActionCreator.getAppointments(this.state.pageNumber, this.state.pageSize);
-    var loggedOnUser = LoginStore.loggedOnUser;
-    var practiceId = localStorage.getItem("practiceId");
-    AppointmentActionCreator.getHealthVuAppointments(loggedOnUser.practiceId, AppointmentStore.resultPage, AppointmentStore.maxResults);
-    //this.dataSet = new TableDataSet(this.state.data);
+    this.queryData(this.state.pageNumber+1,this.state.pageSize);
     this.changeListener = this._onChange.bind(this);
     AppointmentStore.addChangeListener(this.changeListener);
-    //this.queryData();
   }
 
   _onChange() {
+    //console.log(this.refs.table);
+    AppointmentService.getAppointmentsTotal(this.loggedOnUser.practiceId, -1, 10);
+    this.refs.table.store.dataSize = AppointmentStore.totalResultCount;
+    //console.log(this.refs.table);
     console.log("in _onChange")
     this.setState({
       data: AppointmentStore.appointments,
       selected: AppointmentStore.appointment
     });
+    console.log("in main " + this.state.edit);
+    if (this.refs.editComp.state.edit){
+      //AppointmentActionCreator.getHealthVuAppointments(AppointmentStore.practiceId, AppointmentStore.resultPage, AppointmentStore.maxResults);
+    }
 
-    console.log(this.refs.table);
-    //console.log("Hemal " + JSON.stringify(this.state.data));
-
+    //Verify this..... on time outs.
+    if (AppointmentStore.error != null) {
+      BootstrapDialog.alert({
+        message: 'There was an error retrieving data.',
+        title: 'Failed',
+        type: BootstrapDialog.TYPE_WARNING
+      });
+      console.log(AppointmentStore.error.message);
+      LoginActionCreator.logoutUser();
+    }
   }
 
   componentWillUnmount() {
@@ -75,18 +90,13 @@ export default class BasicTable extends React.Component{
   }
 
   queryData(page, sizePerPage){
-
     if (this.state.pageSize != sizePerPage){
       page = 1;
     }
     this.state.pageNumber = page - 1;
     this.state.pageSize = sizePerPage;
     this.options.sizePerPage = sizePerPage;
-
-    AppointmentActionCreator.getHealthVuAppointments(1, this.state.pageNumber, this.state.pageSize);
-    //this.dataSet.setData(this.state.data);
-    //this._onChange();
-
+    AppointmentActionCreator.getHealthVuAppointments(AppointmentStore.practiceId, this.state.pageNumber, this.state.pageSize);
   }
 
   onPageChange(page, sizePerPage) {
@@ -109,8 +119,6 @@ export default class BasicTable extends React.Component{
   }
 
   onRowSelect(row, isSelected){
-
-    console.log(row.patientFirst);
 
     $(".modal-body #patientEmail").val(row.patientEmail);
     $(".modal-body #providerPrefix").val(row.providerPrefix);
@@ -184,7 +192,6 @@ export default class BasicTable extends React.Component{
 
   render(){
 
-
     $(document).on('click', '.open-AddBookDialog', function(){
       $(".modal-body #patientEmail").val('');
       $(".modal-body #providerPrefix").val('');
@@ -202,7 +209,7 @@ export default class BasicTable extends React.Component{
       $(".modal-body #appointmentId").val(uuid.v4());
 
     });
-    //var dateFormat = require('dateformat');
+
     function nameFormatter(cell, row){
       return cell + " " + row.patientLast;
     }
@@ -256,7 +263,7 @@ export default class BasicTable extends React.Component{
           ref='table'
           options={this.options}
         >
-          <TableHeaderColumn type="date" dataField="appointmentDateTime" dataFormat={dateFormatter} dataSort={true}>Date & Time</TableHeaderColumn>
+          <TableHeaderColumn type="date" dataField="appointmentDateTime" dataFormat={dateFormatter} dataSort={true}>Appointment Date</TableHeaderColumn>
           <TableHeaderColumn dataField="patientFirst" dataSort={true} dataFormat={nameFormatter}>Patient Name</TableHeaderColumn>
           <TableHeaderColumn type="text" dataField="providerFirst" dataSort={true} dataFormat={providerFormatter}>Provider</TableHeaderColumn>
           <TableHeaderColumn type="text" dataField="appointmentLocationName" dataSort={true}>Appointment Location</TableHeaderColumn>
@@ -291,7 +298,7 @@ export default class BasicTable extends React.Component{
               </div>
               <br />
               <div className="modal-body">
-                <EditAppointent appointment={this.state.selected} />
+                <EditAppointent ref="editComp" appointment={this.state.selected} />
               </div>
             {/*
               <div className="modal-footer">

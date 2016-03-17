@@ -18,8 +18,43 @@ export default class EditAppointent extends React.Component {
       style: null,
       value: "",
       loading: false,
-      errors: {}
+      errors: {},
+      edit: false
     }
+  }
+
+  componentDidMount(){
+    console.log("in componentDidMount_edit")
+    this.changeListener = this._onChangeEdit.bind(this);
+    AppointmentStore.addChangeListener(this.changeListener);
+  }
+
+  _onChangeEdit() {
+    console.log("in _onChange_edit");
+    console.log("after edit: " + this.state.edit);
+
+    if (this.state.edit) {
+      console.log("Result " + AppointmentStore.error);
+
+      if (AppointmentStore.error == null) {
+        BootstrapDialog.alert({
+          message: 'Data Saved Successfully',
+          title: 'Success',
+          type: BootstrapDialog.TYPE_SUCCESS
+        });
+        $('#myModal').modal('hide');
+        //AppointmentActionCreator.getHealthVuAppointments(AppointmentStore.practiceId, AppointmentStore.resultPage, AppointmentStore.maxResults);
+      } else {
+        BootstrapDialog.alert({
+          message: 'There was an error saving data',
+          title: 'Failed',
+          type: BootstrapDialog.TYPE_WARNING
+        });
+      }
+    }
+    this.setState({
+      edit: false
+    });
   }
 
   _handleValidSubmit(values) {
@@ -27,25 +62,12 @@ export default class EditAppointent extends React.Component {
     // from the inputs
     console.log(values);
     console.log("before save");
+    this.setState({
+      edit: true
+    });
     AppointmentActionCreator.saveAppointment(values);
-    console.log("Result " + AppointmentStore.error);
-    if (AppointmentStore.error == null) {
+    AppointmentActionCreator.getHealthVuAppointments(AppointmentStore.practiceId, AppointmentStore.resultPage, AppointmentStore.maxResults);
 
-      BootstrapDialog.alert({
-        message: 'Data Saved Successfully',
-        title: 'Success',
-        type: BootstrapDialog.TYPE_SUCCESS
-      });
-
-      $('#myModal').modal('hide');
-      AppointmentActionCreator.getHealthVuAppointments(AppointmentStore.practiceId, AppointmentStore.resultPage, AppointmentStore.maxResults);
-    } else {
-      BootstrapDialog.alert({
-        message: 'There was an error saving data',
-        title: 'Failed',
-        type: BootstrapDialog.TYPE_WARNING
-      });
-    }
   }
   _handleInvalidSubmit(errors, values) {
     // Errors is an array containing input names
@@ -58,11 +80,69 @@ export default class EditAppointent extends React.Component {
 
   }
 
-
   render() {
+
+    function specialValidation(e){
+      console.log("element " + e);
+
+    }
+
+    $(document).ready(function(){
+      $('#patientMobile')
+        .click(function(e){
+          //alert("hello");
+        })
+
+      .keydown(function (e) {
+        //alert("heloo");
+        var key = e.charCode || e.keyCode || 0;
+        //$patientMobile = $('#patientMobile');  //$(this);
+
+        // Auto-format- do not expose the mask as the user begins to type
+        if (key !== 8 && key !== 9) {
+          if ($('#patientMobile').val().length === 4) {
+            $('#patientMobile').val($('#patientMobile').val() + ')');
+          }
+          if ($('#patientMobile').val().length === 5) {
+            $('#patientMobile').val($('#patientMobile').val() + ' ');
+          }
+          if ($('#patientMobile').val().length === 9) {
+            $('#patientMobile').val($('#patientMobile').val() + '-');
+          }
+        }
+
+        // Allow numeric (and tab, backspace, delete) keys only
+        return (key == 8 ||
+        key == 9 ||
+        key == 46 ||
+        (key >= 48 && key <= 57) ||
+        (key >= 96 && key <= 105));
+      })
+
+        .bind('focus click', function () {
+          //$('#patientMobile') = $(this);
+
+          if ($('#patientMobile').val().length === 0) {
+            $('#patientMobile').val('(');
+          }
+          else {
+            var val = $('#patientMobile').val();
+            $('#patientMobile').val('').val(val); // Ensure cursor remains at the end
+          }
+        })
+
+        .blur(function () {
+          //$('#patientMobile') = $(this);
+
+          if ($('#patientMobile').val() === '(') {
+            $('#patientMobile').val('');
+          }
+        });
+    });
+
     return (
-      <div className="container">
-        <Form
+      <div className="container" style={{width: "100%"}}>
+        <Form id="appointmentForm"
           onload={this._loadForm.bind(this)}
           // Supply callbacks to both valid and invalid
           // submit attempts
@@ -79,6 +159,7 @@ export default class EditAppointent extends React.Component {
                   label="Appointment Date-Time"
                   validate = 'required'
                   errorHelp='date is required'
+                  onChange={specialValidation}
                 />
               </div>
               <div className="form-group">

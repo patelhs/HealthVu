@@ -4,6 +4,8 @@ import bluebird from 'bluebird';
 import querystring from 'queryString';
 import { APPOINTMENTS_API_URL, GET_APPOINTMENTS_URL, SAVE_APPOINTMENT_URL } from '../constants/AppConstants';
 
+import AppointmentStore from '../stores/AppointmentStore';
+
 class AppointmentService {
 
   getAll(pageNumber, pageSize) {
@@ -81,6 +83,39 @@ class AppointmentService {
 
   }
 
+  getAppointmentsTotal(practiceId, resultPage, maxResults){
+    var id_token = localStorage.getItem("jv_jwt");
+
+    var formData = {
+      practiceId: practiceId,
+      resultPage: resultPage,
+      maxResults: maxResults
+    };
+    var data = querystring.stringify(formData);
+    var contentLength = data.length;
+    var headers = {
+      'auth-token': id_token,
+      'Content-Type': 'application/x-www-form-urlencoded',
+      'Accept': 'application/json'
+    };
+
+    $.ajax({
+      url : GET_APPOINTMENTS_URL,
+      type : "post",
+      async: false,
+      headers: headers,
+      data: data,
+      success : function(data) {
+        if (data != null) {
+          AppointmentStore.totalResultCount = data.totalResultCount;
+        }
+      },
+      error: function(err) {
+        console.log(err);
+      }
+    });
+  }
+
   getAppointments(practiceId, resultPage, maxResults){
     var id_token = localStorage.getItem("jv_jwt");
     //console.log("before sending request: " + id_token);
@@ -107,7 +142,8 @@ class AppointmentService {
           headers: headers,
           body: data,
           json: true,
-          withCredentials: false
+          withCredentials: false,
+          aysnc: false
       },
         (err, response, body) => {
           if(err){

@@ -3,29 +3,37 @@ import ActionTypes from '../constants/ActionTypes';
 import BaseStore from './BaseStore';
 import AppointmentActionCreator from '../actions/AppointmentActionCreators';
 
-
 class AppointmentStore extends BaseStore {
 
   constructor() {
     super();
     this.subscribe(() => this._registerToActions.bind(this));
+
     this._appointments = null;
     this._error = null;
     this._practiceId = 1;
     this._resultPage = 0;
     this._maxResults = 10;
-
-    console.log("store kicked in");
+    this._totalResultCount = 0;
   }
 
   _registerToActions(action) {
     switch(action.type) {
 
+      case ActionTypes.REQUEST_APPOINTMENT_DATA_TOTAL:
+            //console.log("Request total " + JSON.stringify(action));
+            break;
+      case ActionTypes.REQUEST_APPOINTMENT_DATA_TOTAL_SUCCESS:
+            this._totalResultCount = action.body.totalResultCount;
+            this.emitChange();
+            break;
+      case ActionTypes.REQUEST_APPOINTMENT_DATA_TOTAL_ERROR:
+            break;
+
       case ActionTypes.REQUEST_APPOINTMENT_DATA_SUCCESS:
         //console.log("after success " + JSON.stringify(action));
         //console.log(action.body.items);
         this._appointments = action.body.items;
-//        localStorage.setItem("appointments", this._appointments);
         this._error = null;
         this._maxResults = action.maxResults;
         this._resultPage = action.resultPage;
@@ -39,11 +47,11 @@ class AppointmentStore extends BaseStore {
         break;
       case ActionTypes.SAVE_APPOINTMENT_DATA_SUCCESS:
         this._error = null;
-        //this.emitChange();
+        this.emitChange();
         break;
       case ActionTypes.SAVE_APPOINTMENT_DATA_ERROR:
         this._error = action.error;
-        console.log("Error during saving: " + this._error);
+        console.log("in store: " + this._error);
         this.emitChange();
         break;
       default:
@@ -55,8 +63,11 @@ class AppointmentStore extends BaseStore {
     console.log("in store get");
   }
 
+  set totalResultCount(value){
+    this._totalResultCount = value;
+  }
+
   get appointments() {
-    console.log("store prop" + this._appointments);
     return this._appointments;
   }
 
@@ -65,6 +76,10 @@ class AppointmentStore extends BaseStore {
   }
   get practiceId(){
     return this._practiceId;
+  }
+
+  get totalResultCount(){
+    return this._totalResultCount;
   }
   get maxResults(){
     return this._maxResults;
