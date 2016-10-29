@@ -35,8 +35,12 @@ module.exports = {
     dest: dest
   },
   manualjs: {
-    src: 'src/manualjs/*.js',
+    src: src + 'manualjs/*.js',
     dest: dest + '/manualjs'
+  },
+  images: {
+    src: src + '/styles/assets/images/*.*',
+    dest: dest + '/styles/images'
   },
   watch: {
     src: 'src/**/*.*',

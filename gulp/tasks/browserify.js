@@ -8,6 +8,8 @@ var watchify = require('watchify');
 var livereload = require('gulp-livereload');
 var config = require('../config').browserify;
 
+var babelify = require('babelify');
+
 const opts = {
   cache: {},
   packageCache: {},
@@ -17,10 +19,12 @@ const opts = {
 var b = browserify(config.src, opts);
 config.settings.transform.forEach(function(t) {
   b.transform(t, { 'optional': 'es7.objectRestSpread' });
+  b.transform(babelify);
 });
 var w = watchify(b);
 
 gulp.task('browserify', bundle);
+
 w.on('update', bundle);
 
 function bundle(){

@@ -52,10 +52,11 @@ export function dispatchAsync(promise, types, action = {}) {
 
   dispatch(request, action);
   //NB: unable to use Promise.catch() syntax here
+  $('#loading-indicator').show();
   promise.then(
     //dispatches the action for the async-promise-resolved
     //with a hash of the async-promise params and the response body
     (body) => dispatch(success, { ...action, body }),
-    (error) => dispatch(failure, { ...action, error })
+    (error) => dispatch(failure, { ...action, error }),
   )
 }

@@ -6601,3 +6601,9 @@ button.close {
   cursor: inherit;
   display: block;
 }
+
+#loading-indicator {
+  position: absolute;
+  left: 10px;
+  top: 10px;
+}

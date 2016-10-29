@@ -1,6 +1,5 @@
 import React from 'react/addons';
 import {Input, Button, ButtonInput} from 'react-bootstrap';
-import {BootstrapTable, TableHeaderColumn, TableDataSet} from 'react-bootstrap-table';
 import AppointmentStore from '../stores/AppointmentStore';
 import ReactMixin from 'react-mixin';
 import dateFormat from 'dateformat';
@@ -83,61 +82,62 @@ export default class EditAppointent extends React.Component {
   render() {
 
     function specialValidation(e){
-      console.log("element " + e);
+      //console.log("element " + e);
 
     }
 
-    $(document).ready(function(){
-      $('#patientMobile')
-        .click(function(e){
-          //alert("hello");
-        })
-
-      .keydown(function (e) {
-        //alert("heloo");
-        var key = e.charCode || e.keyCode || 0;
-        //$patientMobile = $('#patientMobile');  //$(this);
-
-        // Auto-format- do not expose the mask as the user begins to type
-        if (key !== 8 && key !== 9) {
-          if ($('#patientMobile').val().length === 4) {
-            $('#patientMobile').val($('#patientMobile').val() + ')');
-          }
-          if ($('#patientMobile').val().length === 5) {
-            $('#patientMobile').val($('#patientMobile').val() + ' ');
-          }
-          if ($('#patientMobile').val().length === 9) {
-            $('#patientMobile').val($('#patientMobile').val() + '-');
-          }
-        }
-
-        // Allow numeric (and tab, backspace, delete) keys only
-        return (key == 8 ||
-        key == 9 ||
-        key == 46 ||
-        (key >= 48 && key <= 57) ||
-        (key >= 96 && key <= 105));
-      })
-
-        .bind('focus click', function () {
-          //$('#patientMobile') = $(this);
-
-          if ($('#patientMobile').val().length === 0) {
-            $('#patientMobile').val('(');
-          }
-          else {
-            var val = $('#patientMobile').val();
-            $('#patientMobile').val('').val(val); // Ensure cursor remains at the end
-          }
-        })
-
-        .blur(function () {
-          //$('#patientMobile') = $(this);
-
-          if ($('#patientMobile').val() === '(') {
-            $('#patientMobile').val('');
-          }
-        });
+    $(document).ready(function($){
+      //$('#patientMobile').mask('99-99-999');
+      // $('#patientMobile')
+      //   .click(function(e){
+      //     //alert("hello");
+      //   })
+      //
+      // .keydown(function (e) {
+      //   //alert("heloo");
+      //   var key = e.charCode || e.keyCode || 0;
+      //   //$patientMobile = $('#patientMobile');  //$(this);
+      //
+      //   // Auto-format- do not expose the mask as the user begins to type
+      //   if (key !== 8 && key !== 9) {
+      //     if ($('#patientMobile').val().length === 4) {
+      //       $('#patientMobile').val($('#patientMobile').val() + ')');
+      //     }
+      //     if ($('#patientMobile').val().length === 5) {
+      //       $('#patientMobile').val($('#patientMobile').val() + ' ');
+      //     }
+      //     if ($('#patientMobile').val().length === 9) {
+      //       $('#patientMobile').val($('#patientMobile').val() + '-');
+      //     }
+      //   }
+      //
+      //   // Allow numeric (and tab, backspace, delete) keys only
+      //   return (key == 8 ||
+      //   key == 9 ||
+      //   key == 46 ||
+      //   (key >= 48 && key <= 57) ||
+      //   (key >= 96 && key <= 105));
+      // })
+      //
+      //   .bind('focus click', function () {
+      //     //$('#patientMobile') = $(this);
+      //
+      //     if ($('#patientMobile').val().length === 0) {
+      //       $('#patientMobile').val('(');
+      //     }
+      //     else {
+      //       var val = $('#patientMobile').val();
+      //       $('#patientMobile').val('').val(val); // Ensure cursor remains at the end
+      //     }
+      //   })
+      //
+      //   .blur(function () {
+      //     //$('#patientMobile') = $(this);
+      //
+      //     if ($('#patientMobile').val() === '(') {
+      //       $('#patientMobile').val('');
+      //     }
+      //   });
     });
 
     return (
@@ -284,9 +284,11 @@ export default class EditAppointent extends React.Component {
               <div className="form-group">
                 <ValidatedInput
                   type='text'
-                  label='Patient Cellphone'
+                  label='Patient Cellphone (xxx-xxx-xxxx)'
                   name='patientMobile'
                   id='patientMobile'
+                  pattern="^(\d{3}-|\(\d{3}\)\s)\d{3}-\d{4}$"
+                  maxlength="30"
                   // Validation rules separated with comma
                   validate='required'
                   // Error messages for each error type

@@ -17,6 +17,7 @@ export default class BaseStore extends EventEmitter {
   }
 
   emitChange() {
+    $('#loading-indicator').hide();
     this.emit('CHANGE');
   }
 

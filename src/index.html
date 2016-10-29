@@ -6,7 +6,12 @@
   <meta name="google-signin-client_id" content="902098617021-ks6qj2uq5sm3i34fhad87ibttph63ics.apps.googleusercontent.com">
   <title>Document</title>
 
-
+  <style>
+  #loading-indicator {
+    position: absolute;
+    left: 10px;
+    top: 10px; }
+  </style>
   <link rel="stylesheet" href="styles/main.css">
   <link rel="stylesheet" href="styles/jv.css">
   <link rel="stylesheet" href="styles/bootstrap_3.3.2.css">
@@ -15,6 +20,7 @@
   <script src="manualjs/jszip.js" ></script>
   <script src="manualjs/shim.js"></script>
   <script src="manualjs/xlsx.js"></script>
+  <!-- <script src="manualjs/jquery-2.1.3.min.js"></script -->
 
   <script src="https://apis.google.com/js/platform.js" async defer></script>
   <script src="http://code.jquery.com/jquery-2.1.3.min.js"></script>
@@ -39,14 +45,15 @@
 </head>
 <body class="img">
 <div class="container-fluid">
+  <img src="styles/images/ajax-loader.gif" id="loading-indicator"  />
   <section id="content">
     <!-- Flux goes here -->
   </section>
 </div>
 <div id="footer" class="container-fluid">
-  <div class="row">Hemal Patel</div>
 </div>
 <script src="js/build.js"></script>
+
 
 </body>
 </html>

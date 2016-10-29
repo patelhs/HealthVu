@@ -5,6 +5,7 @@ import querystring from 'queryString';
 import { APPOINTMENTS_API_URL, GET_APPOINTMENTS_URL, SAVE_APPOINTMENT_URL } from '../constants/AppConstants';
 
 import AppointmentStore from '../stores/AppointmentStore';
+import moment from 'moment';
 
 class AppointmentService {
 
@@ -30,13 +31,17 @@ class AppointmentService {
   }
 
   saveAppointment(appointment){
-    console.log(appointment);
+    //console.log(appointment);
+
+    //change datetime to UTC
+    var local = moment(appointment.appointmentDateTime);
+    var utcDate = local.utc().format("YYYY-MM-DDTHH:mm");
 
     var id_token = localStorage.getItem("jv_jwt");
     //console.log("before sending request: " + id_token);
     var formData = {
       appointmentId: appointment.appointmentId,
-      appointmentDateTime: appointment.appointmentDateTime,
+      appointmentDateTime: utcDate, //appointment.appointmentDateTime,
       providerPrefix: appointment.providerPrefix,
       providerFirst: appointment.providerFirst,
       providerLast: appointment.providerLast,
@@ -81,6 +86,59 @@ class AppointmentService {
       );
     });
 
+  }
+
+  saveAppointmentSync(appointment){
+    console.log(appointment);
+
+    var local = moment(appointment.appointmentDateTime);
+    var utcDate = local.utc().format("YYYY-MM-DDTHH:mm");
+
+    var id_token = localStorage.getItem("jv_jwt");
+    //console.log("before sending request: " + id_token);
+    var formData = {
+      appointmentId: appointment.appointmentId,
+      appointmentDateTime: utcDate,
+      providerPrefix: appointment.providerPrefix,
+      providerFirst: appointment.providerFirst,
+      providerLast: appointment.providerLast,
+      providerMiddle: appointment.providerMiddle,
+      providerSuffix: appointment.providerSuffix,
+      appointmentLocationName: appointment.appointmentLocationName,
+      messageDeliveryPreference: appointment.messageDeliveryPreference,
+      patientEmail: appointment.patientEmail,
+      patientMobile: appointment.patientMobile,
+      patientFirst: appointment.patientFirst,
+      patientLast: appointment.patientLast,
+      isActive:appointment.isActive
+    };
+    var data = querystring.stringify(formData);
+    var contentLength = data.length;
+    var headers = {
+      'auth-token': id_token,
+      'Content-Type': 'application/x-www-form-urlencoded',
+      'Accept': 'application/json'
+
+    }
+    var result = null;
+
+  $.ajax({
+      url : SAVE_APPOINTMENT_URL,
+      type : "post",
+      async: false,
+      headers: headers,
+      data: data,
+      success : function(data) {
+        if (data != null) {
+
+        }
+      },
+      error: function(err) {
+        console.log(err);
+        result = err;
+      }
+    });
+    return result;
   }
 
   getAppointmentsTotal(practiceId, resultPage, maxResults){

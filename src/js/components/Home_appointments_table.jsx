@@ -1,6 +1,9 @@
 import React from 'react/addons';
 import {Input, DatePicker} from 'react-bootstrap';
-import {BootstrapTable, TableHeaderColumn, TableDataSet} from 'react-bootstrap-table';
+//import {BootstrapTable, TableHeaderColumn, TableDataSet} from 'react-bootstrap-table';
+import BootstrapTable from '../react-bootstrap-table/lib/BootstrapTable';
+import TableHeaderColumn from '../react-bootstrap-table/lib/TableHeaderColumn';
+//import TableDataSet from '../react-bootstrap-table/lib/BootstrapTable';
 import AppointmentStore from '../stores/AppointmentStore';
 import LoginStore from '../stores/LoginStore';
 import ReactMixin from 'react-mixin';
@@ -10,6 +13,8 @@ import AppointmentActionCreator from '../actions/AppointmentActionCreators';
 import LoginActionCreator from '../actions/LoginActionCreators';
 import EditAppointent from './Edit_appointment';
 import AppointmentService from '../services/AppointmentService';
+
+import moment from 'moment';
 
 export default class BasicTable extends React.Component{
   constructor(props) {
@@ -59,6 +64,29 @@ export default class BasicTable extends React.Component{
 
   _onChange() {
     //console.log(this.refs.table);
+
+    //Verify this..... on time outs.
+    if (AppointmentStore.error != null) {
+      var message = AppointmentStore.error.message;
+      var alertMsg = "";
+      if (message == 'Invalid ID token.') {
+        BootstrapDialog.alert({
+          message: 'Session Expired. Login again',
+          title: 'Failed',
+          type: BootstrapDialog.TYPE_WARNING
+        });
+        LoginActionCreator.logoutUser();
+        return;
+      }else{
+        BootstrapDialog.alert({
+          message: 'Unknown error occured saving data.',
+          title: 'Failed',
+          type: BootstrapDialog.TYPE_WARNING
+        });
+        return;
+      }
+    }
+
     AppointmentService.getAppointmentsTotal(this.loggedOnUser.practiceId, -1, 10);
     this.refs.table.store.dataSize = AppointmentStore.totalResultCount;
     //console.log(this.refs.table);
@@ -68,21 +96,12 @@ export default class BasicTable extends React.Component{
       selected: AppointmentStore.appointment
     });
     console.log("in main " + this.state.edit);
-    if (this.refs.editComp.state.edit){
+    if (this.refs.editComp.state.edit) {
       //AppointmentActionCreator.getHealthVuAppointments(AppointmentStore.practiceId, AppointmentStore.resultPage, AppointmentStore.maxResults);
     }
-
-    //Verify this..... on time outs.
-    if (AppointmentStore.error != null) {
-      BootstrapDialog.alert({
-        message: 'There was an error retrieving data.',
-        title: 'Failed',
-        type: BootstrapDialog.TYPE_WARNING
-      });
-      console.log(AppointmentStore.error.message);
-      LoginActionCreator.logoutUser();
-    }
   }
+
+
 
   componentWillUnmount() {
     console.log("in componnetWillUnmount");
@@ -106,7 +125,7 @@ export default class BasicTable extends React.Component{
 
   onSizePerPageList(sizePerPage){
     console.log("sizePerPage: " + sizePerPage);
-    alert(sizePerPage);
+    //alert(sizePerPage);
   }
 
   onAfterInsertRow(row){
@@ -115,7 +134,7 @@ export default class BasicTable extends React.Component{
     for(var prop in row){
       newRowStr += prop+": " + row[prop] + " \n";
     }
-    alert("The new row is:\n " + newRowStr);
+    //alert("The new row is:\n " + newRowStr);
   }
 
   onRowSelect(row, isSelected){
@@ -156,7 +175,7 @@ export default class BasicTable extends React.Component{
   }
 
   importAppointments(e){
-    //console.log("in import");
+    console.log("in import");
     console.log(e);
     console.log(e.target.files[0].webkitRelativePath);
 
@@ -178,16 +197,42 @@ export default class BasicTable extends React.Component{
         }
       });
       console.log(result);
+      var msg = " ";
       $.each(result.Sheet1, function(i, item){
         item.appointmentId = uuid.v4();
         //console.log(item);
-        AppointmentActionCreator.saveAppointment(item);
+        //AppointmentActionCreator.saveAppointment(item);
+        var r = AppointmentService.saveAppointmentSync(item);
+        if (r != null){
+          msg = msg + item.patientEmail  + 'was failed during import';
+        }
       });
-      //AppointmentActionCreator.getHealthVuAppointments(1, 1, 25);
+
+      if (msg == " "){
+        msg = "Data Imported successfully!";
+        BootstrapDialog.alert({
+          message: msg,
+          title: 'Success',
+          type: BootstrapDialog.TYPE_SUCCESS
+        });
+        //e.target.files[0] = null;
+        $('input[type="file"]').val(null);
+      }else{
+          BootstrapDialog.alert({
+          message: msg,
+          title: 'Failed',
+          type: BootstrapDialog.TYPE_WARNING
+        });
+        $('input[type="file"]').val(null);
     }
 
+      //AppointmentActionCreator.getHealthVuAppointments(1, 1, 25);
+  }
     // when the file is read it triggers the onload event above.
     reader.readAsBinaryString(e.target.files[0]);
+    console.log("import completing");
+
+
   }
 
   render(){
@@ -210,19 +255,28 @@ export default class BasicTable extends React.Component{
 
     });
 
+
     function nameFormatter(cell, row){
       return cell + " " + row.patientLast;
     }
 
     function providerFormatter(cell, row){
-      return cell + " " + + row.providerMiddle + row.providerLast;
+      return cell + " " + row.providerMiddle + " " + row.providerLast;
     }
 
     function dateFormatter(value){
-      var date = Date.parse(value);
-      var t = dateFormat(date, "dddd, mmmm dS, yyyy, h:MM:ss TT");
+
+      var d = Date.parse(value);
+      //var m = moment().format();
+      //console.log("db value " + value);
+      //var t1 = moment.utc(value).local().format('YYYY-MM-DD HH:mm:ss');
+      //  console.log("moment ddds " + t1);
+
+      var t = dateFormat(d, "dddd, mmmm dS, yyyy, h:MM:ss TT");
+
       return t;
     }
+
 
     function statusFormatter(cell, row){
       var text = '<button type="button" className="btn btn-info"><i className="glyphicon"></i><span>'+row.notificationResponseStatus+'</span></button>';

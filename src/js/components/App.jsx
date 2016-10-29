@@ -29,6 +29,7 @@ export default class App extends React.Component {
     //register change listener with LoginStore
     this.changeListener = this._onLoginChange.bind(this);
     LoginStore.addChangeListener(this.changeListener);
+    $('#loading-indicator').hide();
   }
 
   /*
@@ -60,15 +61,12 @@ export default class App extends React.Component {
   }
 
   render() {
-
-
-
-    return (
+   return (
       <div className="container">
         <nav className="naviBar">
           <div className="navbar-header">
-            <a href="/"> <span className="title -health">Health</span><span className="title -vue">Vue</span></a>
-          </div>
+            <a href="/"><img src ="styles/images/healthvue.png"></img></a>
+            </div>
           {this.headerItems}
         </nav>
         <div className="titleBorder"><div className="titleBorderMask"></div></div>
@@ -84,7 +82,6 @@ export default class App extends React.Component {
 
     var auth2 = gapi.auth2.getAuthInstance();
     auth2.signOut().then(function () {
-      alert("google signed out");
       console.log('User signed out.');
     });
 
@@ -101,9 +98,11 @@ export default class App extends React.Component {
         <li>
           <Link to="login">Login</Link>
         </li>
+        {/*
         <li>
           <Link to="signup">Signup</Link>
         </li>
+        */}
       </ul>)
     } else {
       return (

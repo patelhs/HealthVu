@@ -28,6 +28,7 @@ class AppointmentStore extends BaseStore {
             this.emitChange();
             break;
       case ActionTypes.REQUEST_APPOINTMENT_DATA_TOTAL_ERROR:
+            this.emitChange();
             break;
 
       case ActionTypes.REQUEST_APPOINTMENT_DATA_SUCCESS:
