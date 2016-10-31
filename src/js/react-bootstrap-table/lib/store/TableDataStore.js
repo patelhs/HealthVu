@@ -71,7 +71,7 @@ exports.TableDataSet = TableDataSet;
 
 var TableDataStore = (function () {
   function TableDataStore(data, dataSize) {
-    console.log("store: "+  dataSize);
+    //console.log("store: "+  dataSize);
     _classCallCheck(this, TableDataStore);
 
     this.data = data;

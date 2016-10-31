@@ -15,7 +15,7 @@ class LoginStore extends BaseStore {
     this._practiceId = null;
 
     //attempt auto-login
-    console.log('&*&*&*& attempting auto-login in LoginStore');
+    //console.log('&*&*&*& attempting auto-login in LoginStore');
     this._autoLogin();
   }
 
@@ -97,7 +97,7 @@ class LoginStore extends BaseStore {
       this._user = jwt_decode(this._jwt);
       this._loggedOnUser = loggedOnUser;
       this._practiceId = practiceId;
-      console.log("&*&*&* autologin success")
+      //console.log("&*&*&* autologin success")
     }
   }
 
@@ -114,7 +114,7 @@ class LoginStore extends BaseStore {
   }
 
   get loggedOnUser(){
-    console.log("getting logged in user: " + this._loggedOnUser);
+    //console.log("getting logged in user: " + this._loggedOnUser);
     return JSON.parse(this._loggedOnUser);
   }
 

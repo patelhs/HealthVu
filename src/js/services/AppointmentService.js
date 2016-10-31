@@ -89,7 +89,7 @@ class AppointmentService {
   }
 
   saveAppointmentSync(appointment){
-    console.log(appointment);
+    //console.log(appointment);
 
     var local = moment(appointment.appointmentDateTime);
     var utcDate = local.utc().format("YYYY-MM-DDTHH:mm");

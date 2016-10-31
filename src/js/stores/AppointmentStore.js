@@ -33,7 +33,7 @@ class AppointmentStore extends BaseStore {
 
       case ActionTypes.REQUEST_APPOINTMENT_DATA_SUCCESS:
         //console.log("after success " + JSON.stringify(action));
-        //console.log(action.body.items);
+        console.log(action.body.items);
         this._appointments = action.body.items;
         this._error = null;
         this._maxResults = action.maxResults;
@@ -52,7 +52,7 @@ class AppointmentStore extends BaseStore {
         break;
       case ActionTypes.SAVE_APPOINTMENT_DATA_ERROR:
         this._error = action.error;
-        console.log("in store: " + this._error);
+        //console.log("in store: " + this._error);
         this.emitChange();
         break;
       default:
@@ -61,7 +61,7 @@ class AppointmentStore extends BaseStore {
   }
 
   _getAppointments(){
-    console.log("in store get");
+    //console.log("in store get");
   }
 
   set totalResultCount(value){

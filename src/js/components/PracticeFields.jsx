@@ -24,12 +24,12 @@ class PracticeFields extends React.Component {
   _handleInvalidSubmit(errors, values) {
     // Errors is an array containing input names
     // that failed to validate
-    console.log("testing2");
+    //console.log("testing2");
 
   }
 
   _handleBack(){
-    console.log("back button clicked");
+    //console.log("back button clicked");
   }
 
   _loadForm() {

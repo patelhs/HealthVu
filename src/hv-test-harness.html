@@ -5,12 +5,12 @@
 </head>
 <body>
   <script>
-  
+
 	//var host = 'wnxmac03:8080';
 	var host = 'hv-rest-staging.elasticbeanstalk.com';
-  
+
 	var id_token;
-	
+
     function onSuccess(googleUser) {
       id_token = googleUser.getAuthResponse().id_token;
 	  signIntoService(id_token);
@@ -25,56 +25,56 @@
         'onfailure': onFailure
       });
     }
-	
-	
+
+
 	function signIntoService (id_token) {
-	
-		handler = function() { // define the handler		
+
+		handler = function() { // define the handler
 			if (httpRequest.readyState === 4) { // 4 means it's ready
 				if (httpRequest.status === 200) { // 200 is an "OK" status
-				  console.log(httpRequest.responseText); // Note console.log is not supported on IE8 do a null check
-				  
+				  //console.log(httpRequest.responseText); // Note console.log is not supported on IE8 do a null check
+
 				  practiceUserModel = JSON.parse(httpRequest.responseText); // parse the json response to create "object"
-				  console.log(practiceUserModel.firstName + " " + practiceUserModel.lastName + " " + practiceUserModel.emailAddress + " " + practiceUserModel.practiceUserId);
-				  
+				  //console.log(practiceUserModel.firstName + " " + practiceUserModel.lastName + " " + practiceUserModel.emailAddress + " " + practiceUserModel.practiceUserId);
+
 				} else { // all errors are delivered using standard HTTP returns - check the response for a message describing the problem. Services errors will be conveyed in this way
-				  console.log('There was a problem with the request.', httpRequest);
+				  //console.log('There was a problem with the request.', httpRequest);
 				}
 			}
 		};
-	
-	
+
+
 		/*
 			Custom function to handle sign in
 			 - uses standard xml http request to do service calls
 		*/
 		var httpRequest = new XMLHttpRequest();
 		httpRequest.open('POST', 'http://' + host + '/find-practice-user', true); // can be post or get
-		
+
 		// Below we set all the headers
 		httpRequest.setRequestHeader('auth-token', id_token); // the token is always needed for every service call
 		httpRequest.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 		httpRequest.setRequestHeader('Accept', 'application/json');
 		httpRequest.onreadystatechange = handler; // set the handler
 		httpRequest.send(); // would send post or get params in the send method otherwise its blank
-		
-		
+
+
 	}
-	
+
 	function addAppointment (appointmentId, appointmentDateTime) {
-	
-		console.log('addAppointment called');
-		
-		handler = function() { // define the handler		
+
+		//console.log('addAppointment called');
+
+		handler = function() { // define the handler
 			if (httpRequest.readyState === 4) { // 4 means it's ready
 				if (httpRequest.status === 200) { // 200 is an "OK" status
-				  console.log(httpRequest.responseText); // Note console.log is not supported on IE8 do a null check
-				  
+				  //console.log(httpRequest.responseText); // Note console.log is not supported on IE8 do a null check
+
 				  var appointmentModel = JSON.parse(httpRequest.responseText); // parse the json response to create "object"
-				  console.log("Appointment ID:" + appointmentModel.appointmentId);
-				  
+				  //console.log("Appointment ID:" + appointmentModel.appointmentId);
+
 				} else { // all errors are delivered using standard HTTP returns - check the response for a message describing the problem. Services errors will be conveyed in this way
-				  console.log('There was a problem with the request.', httpRequest);
+				  //console.log('There was a problem with the request.', httpRequest);
 				}
 			}
 		};
@@ -84,14 +84,14 @@
 		*/
 		var httpRequest = new XMLHttpRequest();
 		httpRequest.open('POST', 'http://' + host + '/add-appointment', true); // can be post or get
-		
+
 		// Below we set all the headers
 		httpRequest.setRequestHeader('auth-token', id_token); // the token is always needed for every service call
 		httpRequest.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 		httpRequest.setRequestHeader('Accept', 'application/json');
-		
+
 		httpRequest.onreadystatechange = handler; // set the handler
-		
+
 		//if (appointmentId == undefined) appointmentId = "";
 		httpRequest.send(
 			"appointmentId=" + appointmentId +
@@ -109,19 +109,19 @@
 			"&patientLast=Wash" +
 			"&isActive=true");
 	}
-	
+
 	function inactivateAppointment (appointmentId) {
-	
+
 		console.log('inactivateAppointment called');
-		
-		handler = function() { // define the handler		
+
+		handler = function() { // define the handler
 			if (httpRequest.readyState === 4) { // 4 means it's ready
 				if (httpRequest.status === 200) { // 200 is an "OK" status
 				  console.log(httpRequest.responseText); // Note console.log is not supported on IE8 do a null check
-				  
+
 				  var success = JSON.parse(httpRequest.responseText); // parse the json response to create "object"
 				  console.log("Inactivate Item Status: " + success);
-				  
+
 				} else { // all errors are delivered using standard HTTP returns - check the response for a message describing the problem. Services errors will be conveyed in this way
 				  console.log('There was a problem with the request.', httpRequest);
 				}
@@ -133,29 +133,29 @@
 		*/
 		var httpRequest = new XMLHttpRequest();
 		httpRequest.open('POST', 'http://' + host + '/inactivate-appointment', true); // can be post or get
-		
+
 		// Below we set all the headers
 		httpRequest.setRequestHeader('auth-token', id_token); // the token is always needed for every service call
 		httpRequest.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 		httpRequest.setRequestHeader('Accept', 'application/json');
-		
+
 		httpRequest.onreadystatechange = handler; // set the handler
-		
+
 		httpRequest.send(
 			"appointmentId=" + appointmentId);
 	}
-	
+
 	function sendAppointmentConfirmation (appointmentDateUTC) {
 		console.log('sendAppointmentConfirmation called');
-		
-		handler = function() { // define the handler		
+
+		handler = function() { // define the handler
 			if (httpRequest.readyState === 4) { // 4 means it's ready
 				if (httpRequest.status === 200) { // 200 is an "OK" status
 				  console.log(httpRequest.responseText); // Note console.log is not supported on IE8 do a null check
-				  
+
 				  var success = JSON.parse(httpRequest.responseText); // parse the json response to create "object"
 				  console.log("Send Appointment Confirmation: " + success);
-				  
+
 				} else { // all errors are delivered using standard HTTP returns - check the response for a message describing the problem. Services errors will be conveyed in this way
 				  console.log('There was a problem with the request.', httpRequest);
 				}
@@ -167,28 +167,28 @@
 		*/
 		var httpRequest = new XMLHttpRequest();
 		httpRequest.open('POST', 'http://' + host + '/send-appointment-confirmation', true); // can be post or get
-		
+
 		// Below we set all the headers
 		httpRequest.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 		httpRequest.setRequestHeader('Accept', 'application/json');
-		
+
 		httpRequest.onreadystatechange = handler; // set the handler
-		
+
 		httpRequest.send(
 			"appointmentDateUTC=" + appointmentDateUTC);
 	}
-	
+
 	function sendAppointmentReminder (appointmentDateUTC) {
 		console.log('sendAppointmentReminder called');
-		
-		handler = function() { // define the handler		
+
+		handler = function() { // define the handler
 			if (httpRequest.readyState === 4) { // 4 means it's ready
 				if (httpRequest.status === 200) { // 200 is an "OK" status
 				  console.log(httpRequest.responseText); // Note console.log is not supported on IE8 do a null check
-				  
+
 				  var success = JSON.parse(httpRequest.responseText); // parse the json response to create "object"
 				  console.log("Send Appointment Reminder: " + success);
-				  
+
 				} else { // all errors are delivered using standard HTTP returns - check the response for a message describing the problem. Services errors will be conveyed in this way
 				  console.log('There was a problem with the request.', httpRequest);
 				}
@@ -200,28 +200,28 @@
 		*/
 		var httpRequest = new XMLHttpRequest();
 		httpRequest.open('POST', 'http://' + host + '/send-appointment-reminder', true); // can be post or get
-		
+
 		// Below we set all the headers
 		httpRequest.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 		httpRequest.setRequestHeader('Accept', 'application/json');
-		
+
 		httpRequest.onreadystatechange = handler; // set the handler
-		
+
 		httpRequest.send(
 			"appointmentDateUTC=" + appointmentDateUTC);
 	}
-	
+
 	function viewAppointments (practiceId, resultPage, maxResults) {
 		console.log('viewAppointments called');
-		
-		handler = function() { // define the handler		
+
+		handler = function() { // define the handler
 			if (httpRequest.readyState === 4) { // 4 means it's ready
 				if (httpRequest.status === 200) { // 200 is an "OK" status
 				  console.log(httpRequest.responseText); // Note console.log is not supported on IE8 do a null check
-				  
+
 				  var success = JSON.parse(httpRequest.responseText); // parse the json response to create "object"
 				  console.log("View Appointments: " + success);
-				  
+
 				} else { // all errors are delivered using standard HTTP returns - check the response for a message describing the problem. Services errors will be conveyed in this way
 				  console.log('There was a problem with the request.', httpRequest);
 				}
@@ -233,44 +233,44 @@
 		*/
 		var httpRequest = new XMLHttpRequest();
 		httpRequest.open('POST', 'http://' + host + '/view-appointments', true); // can be post or get
-		
+
 		// Below we set all the headers
 		httpRequest.setRequestHeader('auth-token', id_token); // the token is always needed for every service call
 		httpRequest.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 		httpRequest.setRequestHeader('Accept', 'application/json');
-		
+
 		httpRequest.onreadystatechange = handler; // set the handler
-		
+
 		httpRequest.send(
-			"practiceId=" + practiceId + 
+			"practiceId=" + practiceId +
 			"&resultPage=" + resultPage +
 			"&maxResults=" + maxResults);
 	}
-	
+
   </script>
-  
+
   <!-- div is recognized by google -->
   <div id="my-signin2"></div>
-  
+
   <div>
   <input type="button" onClick="addAppointment(document.getElementById('appointmentId').value, document.getElementById('appointmentDateUTC').value)" value="Add Appointment">
   <input type="button" onClick="inactivateAppointment(document.getElementById('appointmentId').value)" value="Inactivate Appointment">
   <div><label>Appointment Id:<input type="text" id="appointmentId"  size="40"></label></div>
   </div>
-  
+
   <div>
   <div><label>Appointment Date Time (UTC):<input type="text" id="appointmentDateUTC" size="40" value="2015-09-15T00:00:00-04:00"></label></div>
   <input type="button" onClick="sendAppointmentConfirmation(document.getElementById('appointmentDateUTC').value)" value="Send Appointment Confirmation">
   <input type="button" onClick="sendAppointmentReminder(document.getElementById('appointmentDateUTC').value)" value="Send Appointment Reminder">
   </div>
-  
+
   <div>
-  
+
   <div><label>Practice Id:<input type="text" id="practiceId" size="40" value="1"></label></div>
   <div><label>Result Page:<input type="text" id="resultPage" size="40" value="1"></label></div>
   <div><label>Max Results:<input type="text" id="maxResults" size="40" value="25"></label></div>
   <input type="button" onClick="viewAppointments(document.getElementById('practiceId').value, document.getElementById('resultPage').value, document.getElementById('maxResults').value)" value="View Appointments">
-  
+
   </div>
 
   <!-- include the google script on an page needing id caps -->

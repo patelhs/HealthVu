@@ -26,7 +26,7 @@ export default {
   },
 
   googleLogin: (googleUser) => {
-    console.log("actionc: " + googleUser);
+    //console.log("actionc: " + googleUser);
     //dispatch(ActionTypes.GOOGLE_LOGIN, {googleUser: googleUser});
 
     let promise = AuthService.signup(googleUser);

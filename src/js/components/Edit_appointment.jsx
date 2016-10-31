@@ -11,7 +11,7 @@ import AppointmentActionCreator from '../actions/AppointmentActionCreators';
 export default class EditAppointent extends React.Component {
   constructor(props) {
     super(props);
-    console.log("ON Edit: " + props.appointment);
+    //console.log("ON Edit: " + props.appointment);
     this.state = {
       disabled: true,
       style: null,
@@ -23,17 +23,17 @@ export default class EditAppointent extends React.Component {
   }
 
   componentDidMount(){
-    console.log("in componentDidMount_edit")
+    //console.log("in componentDidMount_edit")
     this.changeListener = this._onChangeEdit.bind(this);
     AppointmentStore.addChangeListener(this.changeListener);
   }
 
   _onChangeEdit() {
-    console.log("in _onChange_edit");
-    console.log("after edit: " + this.state.edit);
+    //console.log("in _onChange_edit");
+    //console.log("after edit: " + this.state.edit);
 
     if (this.state.edit) {
-      console.log("Result " + AppointmentStore.error);
+      //console.log("Result " + AppointmentStore.error);
 
       if (AppointmentStore.error == null) {
         BootstrapDialog.alert({
@@ -59,8 +59,8 @@ export default class EditAppointent extends React.Component {
   _handleValidSubmit(values) {
     // Values is an object containing all values
     // from the inputs
-    console.log(values);
-    console.log("before save");
+    //console.log(values);
+    //console.log("before save");
     this.setState({
       edit: true
     });
@@ -71,11 +71,11 @@ export default class EditAppointent extends React.Component {
   _handleInvalidSubmit(errors, values) {
     // Errors is an array containing input names
     // that failed to validate
-    console.log(errors);
+    //console.log(errors);
   }
 
   _loadForm() {
-    alert("loading");
+    //alert("loading");
 
   }
 
@@ -87,57 +87,10 @@ export default class EditAppointent extends React.Component {
     }
 
     $(document).ready(function($){
-      //$('#patientMobile').mask('99-99-999');
-      // $('#patientMobile')
-      //   .click(function(e){
-      //     //alert("hello");
-      //   })
-      //
-      // .keydown(function (e) {
-      //   //alert("heloo");
-      //   var key = e.charCode || e.keyCode || 0;
-      //   //$patientMobile = $('#patientMobile');  //$(this);
-      //
-      //   // Auto-format- do not expose the mask as the user begins to type
-      //   if (key !== 8 && key !== 9) {
-      //     if ($('#patientMobile').val().length === 4) {
-      //       $('#patientMobile').val($('#patientMobile').val() + ')');
-      //     }
-      //     if ($('#patientMobile').val().length === 5) {
-      //       $('#patientMobile').val($('#patientMobile').val() + ' ');
-      //     }
-      //     if ($('#patientMobile').val().length === 9) {
-      //       $('#patientMobile').val($('#patientMobile').val() + '-');
-      //     }
-      //   }
-      //
-      //   // Allow numeric (and tab, backspace, delete) keys only
-      //   return (key == 8 ||
-      //   key == 9 ||
-      //   key == 46 ||
-      //   (key >= 48 && key <= 57) ||
-      //   (key >= 96 && key <= 105));
-      // })
-      //
-      //   .bind('focus click', function () {
-      //     //$('#patientMobile') = $(this);
-      //
-      //     if ($('#patientMobile').val().length === 0) {
-      //       $('#patientMobile').val('(');
-      //     }
-      //     else {
-      //       var val = $('#patientMobile').val();
-      //       $('#patientMobile').val('').val(val); // Ensure cursor remains at the end
-      //     }
-      //   })
-      //
-      //   .blur(function () {
-      //     //$('#patientMobile') = $(this);
-      //
-      //     if ($('#patientMobile').val() === '(') {
-      //       $('#patientMobile').val('');
-      //     }
-      //   });
+      $('.bootstrap-dialog-footer-buttons').click(function(){
+        console.log("ok clicked");
+        AppointmentActionCreator.getHealthVuAppointments(AppointmentStore.practiceId, AppointmentStore.resultPage, AppointmentStore.maxResults);
+      });
     });
 
     return (
@@ -288,7 +241,7 @@ export default class EditAppointent extends React.Component {
                   name='patientMobile'
                   id='patientMobile'
                   pattern="^(\d{3}-|\(\d{3}\)\s)\d{3}-\d{4}$"
-                  maxlength="30"
+                  maxLength="30"
                   // Validation rules separated with comma
                   validate='required'
                   // Error messages for each error type

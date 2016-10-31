@@ -1,6 +1,7 @@
 var dest = './dist';
 var src = './src';
 var gutil = require('gulp-util');
+var debug = false;
 
 module.exports = {
   server: {
@@ -35,7 +36,7 @@ module.exports = {
     dest: dest
   },
   manualjs: {
-    src: src + 'manualjs/*.js',
+    src: src + '/manualjs/*.js',
     dest: dest + '/manualjs'
   },
   images: {

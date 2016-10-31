@@ -30,8 +30,8 @@ export default class GoogleLoginButton extends React.Component{
 
     //trigger router change
     //alert("IN google login");
-    console.log("&*&*&* App onLoginChange event: loggedIn=", userLoggedInState.userLoggedIn,
-      "nextTransitionPath=", transitionPath);
+    //console.log("&*&*&* App onLoginChange event: loggedIn=", userLoggedInState.userLoggedIn,
+    //  "nextTransitionPath=", transitionPath);
 
     if(userLoggedInState.userLoggedIn){
       router.transitionTo(transitionPath);
@@ -41,10 +41,10 @@ export default class GoogleLoginButton extends React.Component{
   }
 
   onSignIn(googleUser) {
-    console.log("user signed in"); // plus any other logic here
+    //console.log("user signed in"); // plus any other logic here
     let profile = googleUser.getBasicProfile();
-    console.log(profile.getId());
-    console.log(googleUser);
+    //console.log(profile.getId());
+    //console.log(googleUser);
     //localStorage.setItem("jv_jwt", googleUser.po.id_token);
     //LoginStore.user
 
@@ -57,7 +57,7 @@ export default class GoogleLoginButton extends React.Component{
   }
 
   renderGoogleLoginButton(){
-    console.log('rendering google signin button');
+    //console.log('rendering google signin button');
     gapi.signin2.render('my-signin2', {
       'scope': 'https://www.googleapis.com/auth/plus.login',
       'width': 200,

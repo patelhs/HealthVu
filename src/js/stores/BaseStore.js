@@ -9,7 +9,7 @@ export default class BaseStore extends EventEmitter {
 
   subscribe(actionSubscribe) {
     this._dispatchToken = register(actionSubscribe());
-    console.log("In subscription");
+    //console.log("In subscription");
   }
 
   get dispatchToken() {

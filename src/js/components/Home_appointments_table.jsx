@@ -18,14 +18,14 @@ import moment from 'moment';
 
 export default class BasicTable extends React.Component{
   constructor(props) {
-    console.log("appointments table constructor");
+    //console.log("appointments table constructor");
     super(props);
     this.loggedOnUser = LoginStore.loggedOnUser;
     //Make request to get total
     if (AppointmentStore.totalResultCount == 0){
       //AppointmentService.getAppointmentsTotal(this.loggedOnUser.practiceId, -1, 10);
     }
-    console.log(AppointmentStore.totalResultCount);
+    //console.log(AppointmentStore.totalResultCount);
 
     this.state = this._getAppointments();
     this.options = {
@@ -56,7 +56,7 @@ export default class BasicTable extends React.Component{
   }
 
   componentDidMount(){
-    console.log("in componentDidMount()")
+    //console.log("in componentDidMount()")
     this.queryData(this.state.pageNumber+1,this.state.pageSize);
     this.changeListener = this._onChange.bind(this);
     AppointmentStore.addChangeListener(this.changeListener);
@@ -90,12 +90,12 @@ export default class BasicTable extends React.Component{
     AppointmentService.getAppointmentsTotal(this.loggedOnUser.practiceId, -1, 10);
     this.refs.table.store.dataSize = AppointmentStore.totalResultCount;
     //console.log(this.refs.table);
-    console.log("in _onChange")
+    //console.log("in _onChange")
     this.setState({
       data: AppointmentStore.appointments,
       selected: AppointmentStore.appointment
     });
-    console.log("in main " + this.state.edit);
+    //console.log("in main " + this.state.edit);
     if (this.refs.editComp.state.edit) {
       //AppointmentActionCreator.getHealthVuAppointments(AppointmentStore.practiceId, AppointmentStore.resultPage, AppointmentStore.maxResults);
     }
@@ -104,7 +104,7 @@ export default class BasicTable extends React.Component{
 
 
   componentWillUnmount() {
-    console.log("in componnetWillUnmount");
+    //console.log("in componnetWillUnmount");
     AppointmentStore.removeChangeListener(this.changeListener);
   }
 
@@ -124,7 +124,7 @@ export default class BasicTable extends React.Component{
   }
 
   onSizePerPageList(sizePerPage){
-    console.log("sizePerPage: " + sizePerPage);
+    //console.log("sizePerPage: " + sizePerPage);
     //alert(sizePerPage);
   }
 
@@ -156,12 +156,12 @@ export default class BasicTable extends React.Component{
     $(".modal-body #notificationType").val(row.notificationType);
 
     var date = new Date(row.appointmentDateTime);
-    console.log(date);
+    //console.log(date);
     date = date.toLocaleString();
     var d = dateFormat(date, "yyyy-mm-dd");
     var t = dateFormat(date, 'hh:MM:ss');
     var dt = d + "T" + t;
-    console.log(dt);
+    //console.log(dt);
     //date = '2015-12-08T12:55:00'
     $(".modal-body #appointmentDateTime").val(dt);
 
@@ -175,9 +175,9 @@ export default class BasicTable extends React.Component{
   }
 
   importAppointments(e){
-    console.log("in import");
-    console.log(e);
-    console.log(e.target.files[0].webkitRelativePath);
+    //console.log("in import");
+    //console.log(e);
+    //console.log(e.target.files[0].webkitRelativePath);
 
     var reader = new FileReader();
 
@@ -196,7 +196,7 @@ export default class BasicTable extends React.Component{
           result[sheetName] = roa;
         }
       });
-      console.log(result);
+      //console.log(result);
       var msg = " ";
       $.each(result.Sheet1, function(i, item){
         item.appointmentId = uuid.v4();
@@ -230,7 +230,7 @@ export default class BasicTable extends React.Component{
   }
     // when the file is read it triggers the onload event above.
     reader.readAsBinaryString(e.target.files[0]);
-    console.log("import completing");
+    //console.log("import completing");
 
 
   }
@@ -334,7 +334,7 @@ export default class BasicTable extends React.Component{
           </div>
           <div style={{float:"left", padding:"20px"}}>
             <div className="fileinput fileinput-new " data-provides="fileinput">
-              <span className="btn btn-info btn-lg btn-file" style={{"padding-top":"20px"}}>
+              <span className="btn btn-info btn-lg btn-file" style={{"paddingTop":"20px"}}>
                 <span>Import from Excel</span>
                 <Input type="file" onChange={this.importAppointments.bind(this)} />
               </span>
@@ -346,7 +346,7 @@ export default class BasicTable extends React.Component{
         <div id="myModal" className="modal fade" role="dialog">
           <div className="modal-dialog">
             <div className="modal-content">
-              <div class="modal-header">
+              <div className="modal-header">
                 <button type="button" className="close" data-dismiss="modal">&times;</button>
                 <h2 className="modal-title">Add/Edit Appointment</h2>
               </div>

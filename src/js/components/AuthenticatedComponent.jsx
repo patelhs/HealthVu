@@ -13,7 +13,7 @@ export default (ComposedComponent) => {
 
     static willTransitionTo(transition) {
 
-      console.log('&*&*&* willTransitionTo for authenticated page. Next transition path:', transition.path, 'logged in:', LoginStore.isLoggedIn());
+      //console.log('&*&*&* willTransitionTo for authenticated page. Next transition path:', transition.path, 'logged in:', LoginStore.isLoggedIn());
 
       if (!LoginStore.isLoggedIn()) {
 

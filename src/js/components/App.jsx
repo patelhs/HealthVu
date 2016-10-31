@@ -5,9 +5,6 @@ import LoginActionCreators from '../actions/LoginActionCreators';
 import { Route, RouteHandler, Link } from 'react-router';
 import router from '../router';
 
-
-
-
 export default class App extends React.Component {
 
   constructor() {
@@ -25,7 +22,7 @@ export default class App extends React.Component {
   }
 
   componentDidMount() {
-    console.log("App did mount");
+    //console.log("App did mount");
     //register change listener with LoginStore
     this.changeListener = this._onLoginChange.bind(this);
     LoginStore.addChangeListener(this.changeListener);
@@ -46,8 +43,8 @@ export default class App extends React.Component {
     let transitionPath = RouterStore.nextTransitionPath || '/';
 
     //trigger router change
-    console.log("&*&*&* App onLoginChange event: loggedIn=", userLoggedInState.userLoggedIn,
-      "nextTransitionPath=", transitionPath);
+    //console.log("&*&*&* App onLoginChange event: loggedIn=", userLoggedInState.userLoggedIn,
+    //  "nextTransitionPath=", transitionPath);
 
     if(userLoggedInState.userLoggedIn){
       router.transitionTo(transitionPath);
@@ -82,7 +79,7 @@ export default class App extends React.Component {
 
     var auth2 = gapi.auth2.getAuthInstance();
     auth2.signOut().then(function () {
-      console.log('User signed out.');
+      //console.log('User signed out.');
     });
 
 
