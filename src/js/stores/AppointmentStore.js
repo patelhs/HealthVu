@@ -33,7 +33,7 @@ class AppointmentStore extends BaseStore {
 
       case ActionTypes.REQUEST_APPOINTMENT_DATA_SUCCESS:
         //console.log("after success " + JSON.stringify(action));
-        console.log(action.body.items);
+        //console.log(action.body.items);
         this._appointments = action.body.items;
         this._error = null;
         this._maxResults = action.maxResults;

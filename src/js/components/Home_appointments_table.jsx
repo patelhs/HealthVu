@@ -90,7 +90,7 @@ export default class BasicTable extends React.Component{
     AppointmentService.getAppointmentsTotal(this.loggedOnUser.practiceId, -1, 10);
     this.refs.table.store.dataSize = AppointmentStore.totalResultCount;
     //console.log(this.refs.table);
-    //console.log("in _onChange")
+    console.log("in _onChange")
     this.setState({
       data: AppointmentStore.appointments,
       selected: AppointmentStore.appointment
@@ -210,10 +210,17 @@ export default class BasicTable extends React.Component{
 
       if (msg == " "){
         msg = "Data Imported successfully!";
-        BootstrapDialog.alert({
+        BootstrapDialog.show({
           message: msg,
           title: 'Success',
-          type: BootstrapDialog.TYPE_SUCCESS
+          type: BootstrapDialog.TYPE_SUCCESS,
+          buttons: [{
+            label: 'OK',
+            action: function(dialogItself){
+              AppointmentActionCreator.getHealthVuAppointments(AppointmentStore.practiceId, AppointmentStore.resultPage, AppointmentStore.maxResults);
+              dialogItself.close();
+            }
+          }]
         });
         //e.target.files[0] = null;
         $('input[type="file"]').val(null);
