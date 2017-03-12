@@ -85,8 +85,12 @@ var TableBody = (function (_React$Component) {
       var tableHeader = this.renderTableHeader(isSelectRowDefined);
 
       var tableRows = this.props.data.map(function (data, r) {
+
         var tableColumns = this.props.columns.map(function (column, i) {
+          //console.log("table body:" + data);
+          //if (!(typeof data === 'undefined')){
           var fieldValue = data[column.name];
+          //}
           if (this.editing && column.name !== this.props.keyField && // Key field can't be edit
           column.editable && // column is editable? default is true, user can set it false
           this.state.currEditCell != null && this.state.currEditCell.rid == r && this.state.currEditCell.cid == i) {

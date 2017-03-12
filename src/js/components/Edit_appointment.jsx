@@ -65,7 +65,7 @@ export default class EditAppointent extends React.Component {
       edit: true
     });
     AppointmentActionCreator.saveAppointment(values);
-    AppointmentActionCreator.getHealthVuAppointments(AppointmentStore.practiceId, AppointmentStore.resultPage, AppointmentStore.maxResults);
+    //AppointmentActionCreator.getHealthVuAppointments(AppointmentStore.practiceId, AppointmentStore.resultPage, AppointmentStore.maxResults);
 
   }
   _handleInvalidSubmit(errors, values) {

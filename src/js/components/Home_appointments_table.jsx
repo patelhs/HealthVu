@@ -350,7 +350,7 @@ export default class BasicTable extends React.Component{
             </div>
           </div>
         </div>
-        <div id="myModal" className="modal fade" role="dialog">
+        <div id="myModal" className="modal fade" role="dialog" data-keyboard="true" tabindex="-1">
           <div className="modal-dialog">
             <div className="modal-content">
               <div className="modal-header">
